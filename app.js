@@ -14,7 +14,7 @@ app.use(function(req, res, next){
 
 app.get('/', function(request, response,next) {
   //response.render('routes/index')
-  response.send('OOOO WEEEE !!!');
+  response.send('SO THIS IS A GIANT STEP FOR HUMANITY ! ');
   next();
 });
 
