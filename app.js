@@ -6,20 +6,9 @@ var app = express();
 // views is directory for all template files
 //app.set('views', __dirname + '/views');
 //app.set('view engine', 'ejs');
-
-app.use(function(req, res, next){
-  console.log("Start");
-  next();
-});
-
-app.get('/', function(request, response,next) {
+app.get('/', function(request, response) {
   //response.render('routes/index')
   response.send('SO THIS IS A GIANT STEP FOR HUMANITY ! ');
-  next();
-});
-
-app.use('/',function(req,res){
-  console.log('End');
 });
 
 app.set('port', (process.env.PORT || 5000));
