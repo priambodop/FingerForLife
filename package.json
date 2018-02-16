@@ -13,5 +13,23 @@
     "morgan": "~1.9.0",
     "pug": "2.0.0-beta11",
     "serve-favicon": "~2.4.5"
-  }
+  },
+  "description": "Sample app Node.js using Express",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priambodop/repo-negro.git"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "author": "priambodo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/priambodop/repo-negro/issues"
+  },
+  "homepage": "https://github.com/priambodop/repo-negro#readme"
 }
