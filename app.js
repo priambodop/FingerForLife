@@ -9,6 +9,7 @@ var app = express();
 app.get('/', function(request, response) {
   //response.render('routes/index')
   response.send('SO THIS IS A GIANT STEP FOR HUMANITY ! ');
+  //response.render('routes/index');
 });
 
 app.set('port', (process.env.PORT || 5000));
