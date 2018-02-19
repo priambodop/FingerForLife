@@ -1,1 +1,1 @@
-repo-negro is a repo demo for heroku
+Finger For Life is a web-based game built for Thesis Purpose
