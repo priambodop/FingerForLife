@@ -15,7 +15,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
-  //response.render('routes/index')
+
   //response.send('SO THIS IS A GIANT STEP FOR HUMANITY ! ');
   response.render('home');
 });
