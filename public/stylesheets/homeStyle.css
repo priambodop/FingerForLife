@@ -89,6 +89,10 @@ body{
   color: white;
 }
 
+a{
+  text-decoration: none;
+}
+
 .rightFing{
 
   width: 300px;

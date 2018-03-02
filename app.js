@@ -14,10 +14,15 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.set('view engine', 'ejs');
 
-app.get('/', function(request, response) {
+app.get('/', function(request, response, next) {
 
   //response.send('SO THIS IS A GIANT STEP FOR HUMANITY ! ');
   response.render('home');
+  next();
+});
+
+app.get('/sync', function(req, res){
+  res.render('sync');
 });
 
 app.set('port', (process.env.PORT || 5000));
