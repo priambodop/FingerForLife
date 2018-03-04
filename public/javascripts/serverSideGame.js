@@ -1,88 +1,34 @@
-// var express = require('express');
-// var app = express();
-//
-// var http = require('http');
-// http.createServer(app);
-//
-// var socketIO = require('socket.io');
-// var io = socketIO(http);
+var io;
+var gameSocket;
 
-JQuery(function($){
-  'use strict';
+exports.initGame = function(socketio, gameSocketio){
+  io = socketio;
+  gameSocket = gameSocketio;
 
-  var IO = {
-    init: function(){
-      IO.socket = io.connect();
-      IO.bindEvents();
-    },
+  gameSocket.emit('connected', { message: "You are connected!"});
 
-    bindEvents: function(){
-      IO.socket.on('connected', IO.connected);
-      IO.socket.on('newGameCreated', IO.newGameCreated);
-      IO.socket.on('playerJoinedRoom', IO.playerJoinedRoom);
-      IO.socket.on('beginNewGame', IO.beginNewGame);
-    },
+  gameSocket.on('hostCreateNewGame', hostCreateNewGame);
 
-    connected: function(){
-      App.mySocketId = IO.socket.socket.sessionid;
-    }
-  };
+  gameSocket.on('joinGame', joinGame);
+}
 
-  var logic = {
-    gameId: 0;
+function hostCreateNewGame(){
+  var thisGameId = Math.floor(Math.random() * (999999 - 111111)) + 111111;
 
-    myRole: '',
+  this.emit('newGameCreated', {gameId: thisGameId, mySocketId: this.id});
 
-    mySocketId: '',
+  this.join(thisGameId.toString());
+}
 
-    Host:{
-      players : [],
+function joinGame(data){
+  var thisSocket = this;
 
-      numberOfPlayersInRoom: 0,
+  var room = gameSocket.manager.rooms["/" + data.gameId];
 
-      gameInit:function(data){
-        logic.gameId = data.gameId;
-        logic.mySocketId = data.mySocketId;
-        logic.myRole = 'Host';
-        logic.Host.numberOfPlayersInRoom = 0;
+  data.mySocketId = thisSocket.id;
 
-        App.Host.displayNewGameScreen();
-      },
+  //join the room
+  thisSocket.join(data.gameId);
 
-      displayNewGameScreen: function(){
-        // displaying game screen
-      },
-
-      updateWaitingScreen: function(){
-        $('#player1').append('</p>').text('Player is joined the game !');
-        logic.Host.numberOfPlayersInRoom += 1;
-
-        if (logic.Host.numberOfPlayersInRoom === 2) {
-          IO.socket.emit('hostRoomFull', logic.gameId);
-        }
-      }
-    },
-
-    Player : {
-      hostSocketId: '',
-
-      enterCodeClick: function(){
-        var data = {
-          gameId: +($('#inputGameId').val())
-        };
-
-        IO.socket.emit('playerJoinGame', data);
-
-        logic.myRole = 'Player';
-      },
-
-      updateWaitingScreen: function(data){
-        if (IO.socket.socket.sessionid === data.mySocketId) {
-          logic.myRole = 'Player';
-          logic.gameId = data.gameId;
-        }
-      }
-    }
-  };
-
-}($));
+  io.sockets.in(data.gameId).emit('playerJoinedRoom', data);
+}

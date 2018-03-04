@@ -1,34 +1,123 @@
-var io;
-var gameSocket;
+// var express = require('express');
+// var app = express();
+//
+// var http = require('http');
+// http.createServer(app);
+//
+// var socketIO = require('socket.io');
+// var io = socketIO(http);
 
-exports.initGame = function(socketio, gameSocketio){
-  io = socketio;
-  gameSocket = gameSocketio;
+JQuery(function($){
+  'use strict';
 
-  gameSocket.emit('connected', { message: "You are connected!"});
+  var IO = {
+    init: function(){
+      IO.socket = io.connect();
+      IO.bindEvents();
+    },
 
-  gameSocket.on('createNewGame', createNewGame);
+    bindEvents: function(){
+      IO.socket.on('connected', IO.connected);
+      IO.socket.on('newGameCreated', IO.newGameCreated);
+      IO.socket.on('playerJoinedRoom', IO.playerJoinedRoom);
+      IO.socket.on('beginNewGame', IO.beginNewGame);
+    },
 
-  gameSocket.on('joinGame', joinGame);
-}
+    connected: function(){
+      logic.mySocketId = IO.socket.socket.sessionid;
+    },
 
-function createNewGame(){
-  var thisGameId = Math.floor(Math.random() * (999999 - 111111)) + 111111;
+    newGameCreated: function(data){
+      logic.Host.gameInit(data);
+    },
 
-  this.emit('newGameCreated', {gameId: thisGameId, mySocketId: this.id});
+    playerJoinedRoom: function(data){
+      logic[logic.myRole].updateWaitingScreen(data);
+    }
+  };
 
-  this.join(thisGameId.toString());
-}
+  var logic = {
+    gameId: 0,
 
-function joinGame(data){
-  var thisSocket = this;
+    myRole: '',
 
-  var room = gameSocket.manager.rooms["/" + data.gameId];
+    mySocketId: '',
 
-  data.mySocketId = thisSocket.id;
+    init: function(){
+      logic.cacheElements();
+      logic.bindEvents();
+    },
 
-  //join the room
-  thisSocket.join(data.gameId);
+    cacheElements: function(){
+      logic.$doc = $(document);
 
-  io.sockets.in(data.gameId).emit('playerJoinedRoom', data);
-}
+      //Templates
+      logic.$playerArea = $('#playerArea');
+      logic.$playerTemplate = $('#player-template').html();
+    },
+
+    bindEvents:function(){
+      //host
+      logic.$doc.on('click', '#startGame', logic.Host.startClick);
+
+      //player
+      logic.$doc.on('click', '#enterCodeButton', logic.Player.enterCodeClick);
+    },
+
+    Host:{
+      players : [],
+
+      numberOfPlayersInRoom: 0,
+
+      startClick: function(){
+        IO.socket.emit('hostCreateNewGame');
+      },
+
+      gameInit:function(data){
+        logic.gameId = data.gameId;
+        logic.mySocketId = data.mySocketId;
+        logic.myRole = 'Host';
+        logic.Host.numberOfPlayersInRoom = 0;
+      },
+
+      updateWaitingScreen: function(data){
+        $('#player1').append('</p>').text('Player is joined the game !');
+
+        logic.Host.players.push(data);
+
+        logic.Host.numberOfPlayersInRoom += 1;
+
+        if (logic.Host.numberOfPlayersInRoom === 2) {
+          IO.socket.emit('hostRoomFull', logic.gameId);
+        }
+      }
+    },
+
+    Player : {
+      hostSocketId: '',
+
+      enterCodeClick: function(){
+        var data = {
+          gameId: +($('#inputGameId').val())
+        };
+
+        IO.socket.emit('playerJoinGame', data);
+
+        logic.myRole = 'Player';
+      },
+
+      updateWaitingScreen: function(data){
+        if (IO.socket.socket.sessionid === data.mySocketId) {
+          logic.myRole = 'Player';
+          logic.gameId = data.gameId;
+        }
+
+        $('#playerWaitingMessage').append('</p>').text('Player is joined the game! Please Wait...');
+      }
+    }
+  };
+
+  IO.init();
+  logic.init();
+
+}($));
