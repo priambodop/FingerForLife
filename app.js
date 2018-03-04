@@ -1,22 +1,20 @@
 var express = require('express');
 var app = express();
+
 const path = require('path');
 
-//app.use(express.static(__dirname + '/public'));
+var http = require('http').Server(app);
 
-// views is directory for all template files
-//app.set('views', __dirname + '/views');
-//app.set('view engine', 'ejs');
+var socketIO = require('socket.io');
+var io = socketIO(http);
+
+var finger = require('./public/javascripts/clientSideGame');
 
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.set('views', path.join(__dirname, 'views'));
-
 app.set('view engine', 'ejs');
 
 app.get('/', function(request, response, next) {
-
-  //response.send('SO THIS IS A GIANT STEP FOR HUMANITY ! ');
   response.render('home');
   next();
 });
@@ -25,8 +23,11 @@ app.get('/sync', function(req, res){
   res.render('sync');
 });
 
-app.set('port', (process.env.PORT || 5000));
+io.on('connection', function(socket){
+  finger.initGame(io, socket);
+});
 
+app.set('port', (process.env.PORT || 5000));
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });

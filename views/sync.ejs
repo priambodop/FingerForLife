@@ -39,14 +39,36 @@
 
         </div>
       </div>
+      <div id="gameArea">
+
+      </div>
+
+      <script id="player-template">
+      <div class="player">
+        <div class="player1wrap">
+
+          <div id="player1"></div>
+
+        </div>
+
+        <div class="player2wrap">
+
+          <div id="player2"></div>
+
+        </div>
+      </div>
+      </script>
     </div>
   </body>
 
+  <!-- <script src="/socket.io/socket.io.js"></script>
+  <script src="/public/javascripts/rand"></script> -->
   <script>
-    function getRandInt(){
-      var text = "";
-      text = Math.floor(Math.random() * (999999 - 111111)) + 111111;
-      document.getElementById("code").innerHTML = text;
-    }
+  function getRandInt(){
+    var text = "";
+    text = Math.floor(Math.random() * (999999 - 111111)) + 111111;
+    document.getElementById("code").innerHTML = text;
+  }
+
   </script>
 </html>

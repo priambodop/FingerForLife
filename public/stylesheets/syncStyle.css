@@ -133,3 +133,39 @@ body{
   color: black;
   font-family: sans-serif;
 }
+
+#gameArea{
+  width: 500px;
+  height: 100px;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.player{
+  width: 500px;
+  height: 100px;
+  margin: auto;
+  margin-top: 10px;
+
+  text-align: center;
+}
+
+.player1wrap{
+  width: 200px;
+  height: 70px;
+  margin: auto;
+  margin-top: 10px;
+  margin-left: 40px;
+
+  float: left
+}
+
+.player2wrap{
+  width: 200px;
+  height: 70px;
+  margin: auto;
+  margin-top: 10px;
+  margin-left: 15px;
+
+  float: left;
+}
