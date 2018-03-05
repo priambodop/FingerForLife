@@ -12,10 +12,22 @@ JQuery(function($){
 
   var IO = {
     init: function(){
+      /**
+        * variable ini menyimpan koneksi socket yang sedang terbuka
+      */
       IO.socket = io.connect();
+
+      /**
+        * variable ini memanggil fungsi bindEvents
+      */
       IO.bindEvents();
     },
 
+    /**
+      * pada saat koneksi tersedia, Socket.IO akan listen seluruh elements
+      * yang ada pada fungsi ini, lalu akan menjalankan fungsi tertentu
+      * yang sesuai dengan eventnya
+    */
     bindEvents: function(){
       IO.socket.on('connected', IO.connected);
       IO.socket.on('newGameCreated', IO.newGameCreated);
@@ -23,14 +35,25 @@ JQuery(function($){
       IO.socket.on('beginNewGame', IO.beginNewGame);
     },
 
+    /**
+      * Apabila client sudah berhasil terkoneksi
+    */
     connected: function(){
+      // socket.io session ID milik client akan disimpan
       logic.mySocketId = IO.socket.socket.sessionid;
     },
 
+    /**
+      * Game telah dibuat dan random number code sudah tersedia.
+    */
     newGameCreated: function(data){
       logic.Host.gameInit(data);
     },
 
+
+    /**
+      * Pemain sudah berhasil join
+    */
     playerJoinedRoom: function(data){
       logic[logic.myRole].updateWaitingScreen(data);
     }
