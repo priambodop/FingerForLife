@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mobile Page</title>
+  </head>
+  <body>
+    <form method="post">
+      <input id="code" /> <button>JOIN</button>
+    </form>
+    <p id="messages"></p>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+    var socket = io();
+      function joinGame(){
+        socket.emit('joined', 'You are joined !');
+      }
+
+      socket.on('playerJoined', function(msg){
+        var mes = document.getElementById("messages");
+        mes.innerHTML = msg;
+      });
+    </script>
+  </body>
+</html>
