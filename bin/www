@@ -35,6 +35,18 @@ io.on('connection', function(socket){
   console.log('Client has been connected to socket.io');
   socket.on('disconnect', () => {
     console.log('Client has been disconnected');
+  }),
+  socket.on('player join', function(msg){
+    io.emit('player join', msg);
+  }),
+  socket.on('joining game', function(msg){
+    io.emit('player joining', msg);
+  }),
+  socket.on('you join', function(msg){
+    io.emit('you join', msg);
+  }),
+  socket.on('wrong code', function(msg){
+    io.emit('you join', msg);
   });
 });
 
