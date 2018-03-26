@@ -18,16 +18,16 @@ socket.on('player joining', function(msg){
 
   if (msg == number) {
     if (player < 1) {
-      play1.innerHTML = 'player is joining in ' + msg;
-      socket.emit('you join', 'YES YOU ARE JOINED !!!');
+      play1.innerHTML = 'player 1 is joining in ' + msg;
+      socket.emit('you join', 'You are now joined to the game ! \n Wait for other players to join...');
       player = player + 1;
     }else {
-      play2.innerHTML = 'player is joining in ' + msg;
-      socket.emit('you join', 'YES YOU ARE JOINED !!!');
+      play2.innerHTML = 'player 2 is joining in ' + msg;
+      socket.emit('you join', 'You are now joined to the game ! \n Wait for other players to join...');
       player = player + 1;
     }
   }else {
-    socket.emit('wrong code', 'You are not permitted !');
+    socket.emit('wrong code', 'You input the wrong code :(');
   }
 
 });
