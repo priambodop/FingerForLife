@@ -41,6 +41,11 @@ io.on('connection', function(socket){
   }),
   socket.on('joining game', function(msg){
     io.emit('player joining', msg);
+    // socket.join(msg, () => {
+    //   console.log(msg);
+    //   io.to(msg).emit('player joining', msg);
+    // });
+    //io.emit('player joining', msg);
   }),
   socket.on('you join', function(msg){
     io.emit('you join', msg);

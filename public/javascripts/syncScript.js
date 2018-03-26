@@ -23,7 +23,7 @@ socket.on('player joining', function(msg){
       player = player + 1;
     }else {
       play2.innerHTML = 'player 2 is joining in ' + msg;
-      socket.emit('you join', 'You are now joined to the game ! \n Wait for other players to join...');
+      socket.emit('you join', 'The game is about to begin...');
       player = player + 1;
     }
   }else {
