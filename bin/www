@@ -8,18 +8,17 @@ var app = require('../app');
 var debug = require('debug')('fingerforlife:server');
 var http = require('http');
 var socketIO = require('socket.io');
+var {Users} = require('../public/javascripts/utils/users');
 
 /**
  * Get port from environment and store in Express.
  */
-
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
-
 var server = http.createServer(app);
 
 /**
@@ -28,26 +27,37 @@ var server = http.createServer(app);
 var io = socketIO(server);
 
 /**
+  * Create Users Object
+*/
+var users = new Users();
+
+/**
   * Listen to socket.io connection
 */
-
 io.on('connection', function(socket){
   console.log('Client has been connected to socket.io');
   socket.on('disconnect', () => {
     console.log('Client has been disconnected');
   }),
-  socket.on('player join', function(msg){
-    io.emit('player join', msg);
+
+  socket.on('requestToJoin', function(msg){
+    socket.join(msg.code);
+    users.removeUser(msg.id);
+    users.addUser(msg.id, msg.code);
+
+    io.emit('requestAccepted', msg);
+    socket.emit('joinSucceed', 'Welcome to the game :)');
+    socket.broadcast.to(msg.code).emit('joinSucceed', `a user with id: ${msg.id} is joined`);
   }),
-  socket.on('joining game', function(msg){
-    io.emit('player joining', msg);
-  }),
+
   socket.on('enter room', function(code){
     socket.join(code);
     io.to(code).emit('player joining', code);
   }),
-  socket.on('joined room', function(msg){
-    io.emit('joined room', msg);
+
+  socket.on('mobileToChar', function(data){
+    console.log('data is received');
+    socket.emit('mobileInChar', data);
   });
 });
 
