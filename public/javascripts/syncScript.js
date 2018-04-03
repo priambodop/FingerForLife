@@ -34,8 +34,3 @@ socket.on('requestAccepted', function(msg){
     }
   }
 });
-
-$('#next').submit(function(){
-  socket.emit('toCharPage', playerArray);
-  return false;
-});

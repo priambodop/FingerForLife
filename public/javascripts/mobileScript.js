@@ -6,7 +6,8 @@ socket.on('connect', function(){
   console.log('already connected');
 });
 
-$('#join').submit(function(){
+$('form').submit(function(e){
+  e.preventDefault();
   socket.emit('requestToJoin', {
     id: socket.id,
     room: $('#code').val()
@@ -14,15 +15,6 @@ $('#join').submit(function(){
     $('#code'.val(''))
   });
   return false;
-});
-
-$('#nextPage').submit(function(){
-  socket.emit('mobileToChar', {
-    id: socket.id,
-    room: $('#code').val()
-  }, function(){
-    console.log('data has been sent');
-  });
 });
 
 socket.on('joinSucceed', function(msg){
