@@ -20,6 +20,7 @@ socket.on('connect', function(){
 });
 
 socket.on('requestAccepted', function(msg){
+
   if (msg.room == number) {
     if (player < 1) {
       play1.innerHTML = 'player 1 is joining in ' + msg.room;
