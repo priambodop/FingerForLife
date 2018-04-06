@@ -9,6 +9,10 @@ class Users{
     return newUser;
   }
 
+  getUser(id){
+    return this.userArray.filter((user) => user.id === id)[0];
+  }
+
   removeUser(id){
     var tempUser = this.userArray.filter((user) => user.id === id);
 

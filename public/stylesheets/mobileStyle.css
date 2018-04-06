@@ -1,50 +1,46 @@
-body{
+/* body{
   background-color: #F9690E;
-}
+} */
 
 @font-face {
   font-family: "fingerfunny";
   src: url("Nickname_DEMO.otf");
 }
 
-.bg{
-  width: 1210px;
-  height: 660px;
-  border-style: solid;
-  border-color: black;
-  border-width: thick;
-  margin-top: 20px;
-  margin-left: 20px;
-  /*background-color: #F5D76E;*/
-  background-color: #FDE3A7;
-}
-
 .formContainer {
   text-align: center;
-  margin-top: 200px;
+  margin: 0 auto;
+
 }
 
-.formContainer #code{
+form{
+  text-align: center;
+  margin: 0 auto;
+}
+
+form #code{
   margin-bottom: 25px;
   width: 200px;
   height: 30px;
   font-family: helvetica;
-  text-align: center;
   border-style: solid;
   border-radius: 10px;
   font-size: 15pt;
   background-color: #F5D76E;
 }
 
-.formContainer button{
+form button{
   font-family: fingerfunny;
   font-size: 20pt;
   width: 100px;
   height: 50px;
+  text-align: center;
   border-width: thick;
   border-color: black;
   background-color: #F5D76E;
   border-radius: 7px;
+  text-align: center;
+  margin-left: 500px;
 }
 
 p{

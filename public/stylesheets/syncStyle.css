@@ -1,8 +1,8 @@
-body{
+/* body{
   background-color: #F9690E;
-}
+} */
 
-.bg{
+/* .bg{
   width: 1210px;
   height: 660px;
   border-style: solid;
@@ -11,9 +11,9 @@ body{
   margin-top: 20px;
   margin-left: 20px;
   background-color: #FDE3A7;
-}
+} */
 
-.title{
+.pageContainer{
   width: 800px;
   height: 400px;
   margin: auto;

@@ -40,14 +40,34 @@ io.on('connection', function(socket){
     console.log('Client has been disconnected');
   }),
 
-  socket.on('requestToJoin', function(msg){
-    socket.join(msg.code);
-    users.removeUser(msg.id);
-    users.addUser(msg.id, msg.code);
+  socket.on('createRoom', (msg) => {
+    socket.join(msg, () => {
+      let room = Object.keys(socket.rooms);
+      console.log(`this host is joined in ${room}`);
+    });
+  }),
 
-    io.emit('requestAccepted', msg);
+  socket.on('charMobile', (msg) => {
+    socket.emit('CharMobileAccepted', msg);
+  }),
+
+  socket.on('createMessage', (msg) => {
+    console.log('msg just in');
+    var user = users.getUser(socket.id);
+    console.log(`user id is ${user.id}`);
+    io.to(user.room).emit('messageCreated', msg);
+  }),
+
+  socket.on('requestToJoin', function(msg, callback){
+    socket.join(msg.room);
+    users.removeUser(msg.id);
+    users.addUser(msg.id, msg.room);
+    var user = users.getUser(msg.id);
+
+    console.log(`a user with id: ${user.id} has joined in ${user.room}`);
+    io.to(user.room).emit('requestAccepted', msg);
     socket.emit('joinSucceed', 'Welcome to the game :)');
-    socket.broadcast.to(msg.code).emit('joinSucceed', `a user with id: ${msg.id} is joined`);
+    socket.broadcast.to(user.room).emit('joinSucceed', `a user with id: ${msg.id} is joined`);
   });
 });
 
