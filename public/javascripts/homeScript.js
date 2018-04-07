@@ -26,26 +26,26 @@ var bg = $(".stage-area");
 var titleHtml = $("#homePage").html();
 bg.html(titleHtml);
 
-function toMobile(){
-  var mobileHtml = $(".mobilePage").html();
-  bg.html(mobileHtml);
-}
+// function toMobile(){
+//   var mobileHtml = $(".mobilePage").html();
+//   bg.html(mobileHtml);
+// }
+//
+// function toSync(){
+//   var syncHtml = $("#syncPage").html();
+//   bg.html(syncHtml);
+//
+// }
 
-function toSync(){
-  var syncHtml = $("#syncPage").html();
-  bg.html(syncHtml);
+// function toCharDesk(){
+//   var charHtml = $("#charDesktop").html();
+//   bg.html(charHtml);
+// }
 
-}
-
-function toChar(){
-  var charHtml = $("#charPage").html();
-  bg.html(charHtml);
-}
-
-function toCharMobile(){
-  var charMobileHtml = $("#charMobile").html();
-  bg.html(charMobileHtml);
-}
+// function toCharMobile(){
+//   var charMobileHtml = $("#charMobile").html();
+//   bg.html(charMobileHtml);
+// }
 
 // function getRandInt(){
 //   var text = Math.floor(Math.random() * (999999 - 111111)) + 111111;
@@ -56,7 +56,7 @@ function startClicked(){
   var syncHtml = $("#syncPage").html();
   bg.html(syncHtml);
 
-  getRandInt();
+
   // socket.emit('joinClicked', {
   //   room: $('#code').val()
   // });

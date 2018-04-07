@@ -3,7 +3,7 @@ var socket = io();
 // Socket.io Code related
 
 socket.on('connect', function(){
-  console.log('Ok you are connected !');
+  console.log('Client is connected !');
   console.log(`This is join id: ${socket.id}`);
 });
 
@@ -25,4 +25,9 @@ function requestToJoin(){
     });
     return false;
   });
+}
+
+function toCharMobile(){
+  var charMobileHtml = $("#charMobile").html();
+  bg.html(charMobileHtml);
 }

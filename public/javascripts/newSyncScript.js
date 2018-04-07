@@ -6,7 +6,8 @@ var bg = $(".stage-area");
 */
 
 socket.on('connect', function(){
-  console.log('already connected to socket.io server... ');
+  getRandInt();
+  console.log('Host is connected to socket.io server... ');
   console.log(`This is sync socket id: ${socket.id}`);
 });
 
@@ -15,10 +16,14 @@ socket.on('requestAccepted', function(msg){
   requestAccepted(msg);
 });
 
+socket.on('selectingAcc', function(msg){
+  console.log(msg);
+});
+
 // Socket.io code related ends here
 
-function toChar(){
-  var charHtml = $("#charPage").html();
+function toCharDesk(){
+  var charHtml = $("#charDesktop").html();
   bg.html(charHtml);
 }
 
@@ -27,9 +32,9 @@ function getRandInt(){
   document.getElementById("roomId").innerHTML = text;
 
   var room = text.toString();
-  console.log(`this is a room ${room}`);
+  console.log(`this is a host room ${room}`);
 
-  socket.emit('createRoom', room);
+  socket.emit('hostJoinRoom', room);
 }
 
 function requestAccepted(msg){

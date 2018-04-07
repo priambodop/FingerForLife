@@ -34,13 +34,6 @@
       </div>
     </template>
 
-    <template id="charPage">
-      <h1>Welcome to the Char Page :)</h1>
-      <button id="tryButton">Try it</button>
-
-    </template>
-
-
     <!-- Mobile Page -->
     <template id="mobilePage">
       <link rel="stylesheet" href="stylesheets/mobileStyle.css">
@@ -57,7 +50,24 @@
 
       <template id="charMobile">
         <h1>Welcome to char mobile :)</h1>
-        <button onclick="emitButton()">Emit</button>
+        <!-- <form class="charList"> -->
+          <input type="radio" name="radioChar" id="char1" value="1" onclick="selectChar()">
+          <label for="char1">Char 1</label>
+
+          <input type="radio" name="radioChar" id="char2" value="2" onclick="selectChar()">
+          <label for="char2">Char 2</label>
+
+          <input type="radio" name="radioChar" id="char3" value="3" onclick="selectChar()">
+          <label for="char3">Char 3</label>
+
+          <input type="radio" name="radioChar" id="char4" value="4" onclick="selectChar()">
+          <label for="char4">Char 4</label>
+
+          <input type="radio" name="radioChar" id="char5" value="5" onclick="selectChar()">
+          <label for="char5">Char 5</label>
+        <!-- </form> -->
+
+          <button id="testOnly" onclick="testButton()">TEST</button>
         <script src="/javascripts/charMobileScript.js"></script>
       </template>
 
@@ -97,8 +107,20 @@
         <div class="player2wrap">
           <div id="player2"></div>
         </div>
-        <button onclick="toChar()">char</button>
+        <button onclick="toCharDesk()">char</button>
       </div>
+
+      <template id="charDesktop">
+        <h1>Welcome to the Char Desktop :)</h1>
+        <!-- <p>This is Player 1: </p> -->
+        <div id="player1Char"></div>
+
+        <!-- <p>This is Player 2: </p> -->
+        <div id="player2Char"></div>
+
+        <script src="/javascripts/charDesktopScript.js"></script>
+      </template>
+
       <script src="/javascripts/newSyncScript.js"></script>
     </template>
 
