@@ -23,8 +23,8 @@
             <p>FINGER <br> FOR <br> LIFE</p>
           </div>
 
-          <button onclick="startClicked()">START</button>
-          <button onclick="joinClicked()">JOIN</button>
+          <button id="startButton" onclick="startClicked()">START</button>
+          <button id="joinButton" onclick="joinClicked()">JOIN</button>
 
         </div>
 
@@ -38,10 +38,10 @@
     <template id="mobilePage">
       <link rel="stylesheet" href="stylesheets/mobileStyle.css">
       <div class="formContainer">
-        <p>Enter the code from the desktop below:</p>
+        <p id="command">Enter the code from the desktop below:</p>
         <form>
           <input id="code" autocomplete="off" autofocus> <br>
-          <button onclick="requestToJoin()">JOIN</button>
+          <button id="requestButton" onclick="requestToJoin()">JOIN</button>
         </form>
       </div>
       <p id="joined"></p>
@@ -49,25 +49,23 @@
       <button onclick="toCharMobile()">Char mobile</button>
 
       <template id="charMobile">
-        <h1>Welcome to char mobile :)</h1>
+        <link rel="stylesheet" href="stylesheets/charMobileStyle.css">
+        <h1 id="welcomeTitle">Welcome to char mobile :)</h1>
         <!-- <form class="charList"> -->
           <input type="radio" name="radioChar" id="char1" value="1" onclick="selectChar()">
-          <label for="char1">Char 1</label>
+          <label for="char1"><img src="images/BrocoDude.png" alt="finger"></label>
 
           <input type="radio" name="radioChar" id="char2" value="2" onclick="selectChar()">
-          <label for="char2">Char 2</label>
+          <label for="char2"><img src="images/DabuDonut.png" alt="finger"></label><br>
 
           <input type="radio" name="radioChar" id="char3" value="3" onclick="selectChar()">
-          <label for="char3">Char 3</label>
+          <label for="char3"><img src="images/GrapeYoda.png" alt="finger"></label>
 
           <input type="radio" name="radioChar" id="char4" value="4" onclick="selectChar()">
-          <label for="char4">Char 4</label>
+          <label for="char4"><img src="images/SummerEgg.png" alt="finger"></label>
 
-          <input type="radio" name="radioChar" id="char5" value="5" onclick="selectChar()">
-          <label for="char5">Char 5</label>
+          <button onclick="sendButton()" id="nextButton">CHOOSE</button>
         <!-- </form> -->
-
-          <button id="testOnly" onclick="testButton()">TEST</button>
         <script src="/javascripts/charMobileScript.js"></script>
       </template>
 
@@ -112,10 +110,10 @@
 
       <template id="charDesktop">
         <h1>Welcome to the Char Desktop :)</h1>
-        <!-- <p>This is Player 1: </p> -->
+        <p>This is Player 1: </p>
         <div id="player1Char"></div>
 
-        <!-- <p>This is Player 2: </p> -->
+        <p>This is Player 2: </p>
         <div id="player2Char"></div>
 
         <script src="/javascripts/charDesktopScript.js"></script>

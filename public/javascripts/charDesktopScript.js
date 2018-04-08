@@ -12,8 +12,18 @@ socket.on('fromCharMobile', function(msg){
   feedback.innerHTML = `Your char is ${msg}`;
 });
 
-socket.on('charSelecting', function(val){
-  console.log(`Player is selecting char number ${val}`);
-  var feedback = document.getElementById("player1Char");
-  feedback.innerHTML = `Your char is ${val}`;
+socket.on('charSelecting', function(msg){
+  if (msg.id === players[0].id) {
+    console.log(`Player 1 is selecting char number ${msg.val}`);
+    var player1 = document.getElementById("player1Char");
+    player1.innerHTML = `Your char is ${msg.val}`;
+    // player1.innerHTML = '<img src="images/BrocoDude.png" alt="finger">';
+  }else{
+    console.log(`Player 2 is selecting char number ${msg.val}`);
+    var player2 = document.getElementById("player2Char");
+    player2.innerHTML = `Your char is ${msg.val}`;
+  }
+  // console.log(`Player 1 is selecting char number ${val}`);
+  // var feedback = document.getElementById("player1Char");
+  // feedback.innerHTML = `Your char is ${val}`;
 });

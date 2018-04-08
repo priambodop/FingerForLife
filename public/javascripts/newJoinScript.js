@@ -1,4 +1,5 @@
 var socket = io();
+var playerNo = "";
 
 // Socket.io Code related
 
@@ -10,6 +11,10 @@ socket.on('connect', function(){
 socket.on('joinSucceed', function(msg){
   var messages = document.getElementById("joined");
   messages.innerHTML = msg;
+});
+
+socket.on('toNextPage', function(msg){
+  toCharMobile();
 });
 
 // Socket.io Code Ends Here

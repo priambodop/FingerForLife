@@ -1,0 +1,35 @@
+/* CharMobile Style */
+
+#welcomeTitle{
+  text-align: center;
+  font-size: 22pt;
+  font-family: sans-serif;
+}
+
+label{
+  width: 200px;
+  height: 250px;
+}
+
+input[type=radio]{
+  margin-left: 200px;
+  display:none;
+}
+
+input[type=radio]:checked + label{
+  border-radius: 30px;
+  border-width: 5pt;
+  border-color: #DB0A5B;
+  border-style:inset;
+
+}
+
+#char1, #char3{
+  margin-left: 200px;
+}
+
+label img{
+  width: 200px;
+  height: 250px;
+  margin-left: 100px;
+}

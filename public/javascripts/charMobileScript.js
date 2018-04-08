@@ -1,3 +1,5 @@
+// socket.io connection related starts here
+
 socket.emit('charMobile', `Char Mobile is connecting to Socket.io with id: ${socket.id}`);
 
 socket.on('messageCreated', function(msg){
@@ -8,25 +10,15 @@ socket.on('CharMobileAccepted', function(msg){
   console.log(msg);
 });
 
-function sendButton(){
-  $("#nextButton").click(function(){
-    var valButton = $('input[name="radioChar"]:checked').val();
-    socket.emit('selectingChar', valButton);
-  });
-  // $(".charList").submit(function(e){
-  //   e.preventDefault();
-  //   if (!$('input[name="radioChar"]').is(':checked')) {
-  //     alert("Please Choose a Character");
-  //   }else{
-  //     sendChar();
-  //     socket.emit('selecting', 'HEY IM SELECTING !!!!');
-  //   }
-  // });
-}
+// socket.io connection related ends here
+
 
 function selectChar(){
   var valButton = $('input[name="radioChar"]:checked').val();
-  socket.emit('selectingChar', valButton);
+  socket.emit('selectingChar', {
+    val: valButton,
+    id: socket.id
+  });
 
   console.log(`The value is ${valButton}`);
 }

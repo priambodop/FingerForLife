@@ -41,16 +41,21 @@ io.on('connection', function(socket){
   }),
 
   socket.on('hostJoinRoom', (msg) => {
-    socket.join(msg, () => {
+    socket.join(msg.room, () => {
       let room = Object.keys(socket.rooms);
       console.log(`this host is joined in ${room}`);
     });
     users.removeUser(msg.id);
     users.addUser(msg.id, msg.room);
+    console.log(`user in this room: ${users.getUserList(msg.room)}`);
   }),
 
   socket.on('charDesktop', (msg) => {
     socket.emit('charDesktopAcc', msg);
+  }),
+
+  socket.on('roomFull', (msg) => {
+    io.to(msg.room).emit('toNextPage', msg);
   }),
 
   socket.on('toCharDesk', (msg) => {
@@ -58,15 +63,10 @@ io.on('connection', function(socket){
     socket.emit('fromCharMobile', msg);
   }),
 
-  socket.on('selectingChar', (val) => {
+  socket.on('selectingChar', (msg) => {
     var user = users.getUser(socket.id);
-    socket.emit('charSelecting', val);
-    console.log(`Player in room ${user.room} is selecting char number ${val}`);
-  }),
-
-  socket.on('selecting', (msg) => {
-    console.log(msg);
-    socket.emit('selectingAcc', msg);
+    io.to(user.room).emit('charSelecting', msg);
+    console.log(`Player in room ${user.room} is selecting char number ${msg.val}`);
   }),
 
   socket.on('charMobile', (msg) => {
@@ -82,15 +82,31 @@ io.on('connection', function(socket){
   }),
 
   socket.on('requestToJoin', function(msg, callback){
-    socket.join(msg.room);
-    users.removeUser(msg.id);
-    users.addUser(msg.id, msg.room);
-    var user = users.getUser(msg.id);
+    var check = users.isRoomExist(msg.room);
+    console.log(`this is check: ${check}`);
+    if (check === 1) {
+      socket.join(msg.room);
+      users.removeUser(msg.id);
+      users.addUser(msg.id, msg.room);
+      var user = users.getUser(msg.id);
 
-    console.log(`a user with id: ${user.id} has joined in ${user.room}`);
-    io.to(user.room).emit('requestAccepted', msg);
-    socket.emit('joinSucceed', 'Welcome to the game :)');
-    socket.broadcast.to(user.room).emit('joinSucceed', `a user with id: ${msg.id} is joined`);
+      console.log(`a user with id: ${user.id} has joined in ${user.room}`);
+      io.to(user.room).emit('requestAccepted', msg);
+      socket.emit('joinSucceed', 'Welcome to the game :)');
+      socket.broadcast.to(user.room).emit('joinSucceed', `a user with id: ${msg.id} is joined`);
+    }else{
+      socket.emit('joinSucceed', 'The room is not exist');
+    }
+
+    // socket.join(msg.room);
+    // users.removeUser(msg.id);
+    // users.addUser(msg.id, msg.room);
+    // var user = users.getUser(msg.id);
+    //
+    // console.log(`a user with id: ${user.id} has joined in ${user.room}`);
+    // io.to(user.room).emit('requestAccepted', msg);
+    // socket.emit('joinSucceed', 'Welcome to the game :)');
+    // socket.broadcast.to(user.room).emit('joinSucceed', `a user with id: ${msg.id} is joined`);
   });
 });
 

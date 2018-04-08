@@ -59,7 +59,7 @@ body{
   color: black;
 }
 
-button{
+#startButton, #joinButton{
   width: 250px;
   height: 80px;
   margin-left: 50px;
@@ -78,7 +78,7 @@ button{
   color: white;
 }
 
-button:hover{
+#startButton:hover , #joinButton:hover{
   background-color: #F54707;
 }
 
