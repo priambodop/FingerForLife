@@ -21,7 +21,6 @@ input[type=radio]:checked + label{
   border-width: 5pt;
   border-color: #DB0A5B;
   border-style:inset;
-
 }
 
 #char1, #char3{

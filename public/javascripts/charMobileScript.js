@@ -2,10 +2,6 @@
 
 socket.emit('charMobile', `Char Mobile is connecting to Socket.io with id: ${socket.id}`);
 
-socket.on('messageCreated', function(msg){
-  console.log(msg);
-});
-
 socket.on('CharMobileAccepted', function(msg){
   console.log(msg);
 });
@@ -20,10 +16,17 @@ function selectChar(){
     id: socket.id
   });
 
-  console.log(`The value is ${valButton}`);
+  //debug purpose
+  console.log(`Player is choosing char number ${valButton}`);
 }
 
 function sendChar(){
   var valButton = $('input[name="radioChar"]:checked').val();
-  console.log(`This character is fix ${valButton}`);
+  socket.emit('sendingChar', {
+    val: valButton,
+    id: socket.id
+  });
+
+  //debug purpose
+  console.log(`PLayer has sending fixed character with number: ${valButton}`);
 }

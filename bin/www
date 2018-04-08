@@ -38,75 +38,67 @@ io.on('connection', function(socket){
   console.log('Client has been connected to socket.io');
   socket.on('disconnect', () => {
     console.log('Client has been disconnected');
+    users.removeUser(socket.id);
   }),
 
   socket.on('hostJoinRoom', (msg) => {
-    socket.join(msg.room, () => {
-      let room = Object.keys(socket.rooms);
-      console.log(`this host is joined in ${room}`);
-    });
+    socket.join(msg.room);
     users.removeUser(msg.id);
     users.addUser(msg.id, msg.room);
-    console.log(`user in this room: ${users.getUserList(msg.room)}`);
+
+    //debug purpose
+    var user = users.getUser(msg.id);
+    console.log(`host with id: ${user.id} is joined in ${user.room}`);
   }),
 
+  //debug purpose
   socket.on('charDesktop', (msg) => {
     socket.emit('charDesktopAcc', msg);
   }),
 
+  //When a room is already full
+  //redirecting to the character page
   socket.on('roomFull', (msg) => {
     io.to(msg.room).emit('toNextPage', msg);
   }),
 
-  socket.on('toCharDesk', (msg) => {
-    console.log(`A message from Char Mobile: ${msg}`);
-    socket.emit('fromCharMobile', msg);
-  }),
-
+  //When a user is selecting a character
+  //And the character which is clicked is shown.
   socket.on('selectingChar', (msg) => {
     var user = users.getUser(socket.id);
     io.to(user.room).emit('charSelecting', msg);
-    console.log(`Player in room ${user.room} is selecting char number ${msg.val}`);
+
+    //debug purpose
+    console.log(`Player with id: ${user.id} in room ${user.room} is selecting char number ${msg.val}`);
   }),
 
+  //debug purpose
   socket.on('charMobile', (msg) => {
     socket.emit('CharMobileAccepted', msg);
   }),
 
-  socket.on('createMessage', (msg) => {
-    console.log('msg just in');
-    var user = users.getUser(socket.id);
-    console.log(`user id is ${user.id}`);
-    io.to(user.room).emit('messageCreated', msg);
-
-  }),
-
+  // When a user in mobile page and requesting to join the game
   socket.on('requestToJoin', function(msg, callback){
     var check = users.isRoomExist(msg.room);
+
+    //debug purpose
     console.log(`this is check: ${check}`);
+
     if (check === 1) {
       socket.join(msg.room);
       users.removeUser(msg.id);
       users.addUser(msg.id, msg.room);
       var user = users.getUser(msg.id);
 
+      //debug purpose
       console.log(`a user with id: ${user.id} has joined in ${user.room}`);
+
       io.to(user.room).emit('requestAccepted', msg);
-      socket.emit('joinSucceed', 'Welcome to the game :)');
+      socket.emit('joinSucceed', 'Welcome to the game :) Wait for other player to join');
       socket.broadcast.to(user.room).emit('joinSucceed', `a user with id: ${msg.id} is joined`);
     }else{
       socket.emit('joinSucceed', 'The room is not exist');
     }
-
-    // socket.join(msg.room);
-    // users.removeUser(msg.id);
-    // users.addUser(msg.id, msg.room);
-    // var user = users.getUser(msg.id);
-    //
-    // console.log(`a user with id: ${user.id} has joined in ${user.room}`);
-    // io.to(user.room).emit('requestAccepted', msg);
-    // socket.emit('joinSucceed', 'Welcome to the game :)');
-    // socket.broadcast.to(user.room).emit('joinSucceed', `a user with id: ${msg.id} is joined`);
   });
 });
 

@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <title>Finger For Life</title>
     <link rel="stylesheet" href="stylesheets/homeStyle.css">
-
-
   </head>
   <body>
     <div class="stage-area">
@@ -41,7 +39,7 @@
         <p id="command">Enter the code from the desktop below:</p>
         <form>
           <input id="code" autocomplete="off" autofocus> <br>
-          <button id="requestButton" onclick="requestToJoin()">JOIN</button>
+          <button id="requestButton" onclick="requestToJoin()">SEND</button>
         </form>
       </div>
       <p id="joined"></p>
@@ -50,8 +48,8 @@
 
       <template id="charMobile">
         <link rel="stylesheet" href="stylesheets/charMobileStyle.css">
-        <h1 id="welcomeTitle">Welcome to char mobile :)</h1>
-        <!-- <form class="charList"> -->
+        <h1 id="welcomeTitle">Please select a character to play the game.</h1>
+
           <input type="radio" name="radioChar" id="char1" value="1" onclick="selectChar()">
           <label for="char1"><img src="images/BrocoDude.png" alt="finger"></label>
 
@@ -65,11 +63,11 @@
           <label for="char4"><img src="images/SummerEgg.png" alt="finger"></label>
 
           <button onclick="sendButton()" id="nextButton">CHOOSE</button>
-        <!-- </form> -->
+
         <script src="/javascripts/charMobileScript.js"></script>
       </template>
 
-      <script src="/javascripts/newJoinScript.js"></script>
+      <script src="/javascripts/mobileScript.js"></script>
     </template>
 
     <!-- Sync Page -->
@@ -81,7 +79,7 @@
             <h1>SYNC STEP 1</h1>
           </div>
           <p>Enter the link below in your smartphone or tablet browser.<br>
-          The first person to connect is in charge of the game</p>
+            click join to play the game.</p>
           <div class="link">
             <p>fingerforlife.herokuapp.com</p>
           </div>
@@ -109,7 +107,7 @@
       </div>
 
       <template id="charDesktop">
-        <h1>Welcome to the Char Desktop :)</h1>
+        <h1>Choose a Character on your mobile site.</h1>
         <p>This is Player 1: </p>
         <div id="player1Char"></div>
 
@@ -119,7 +117,7 @@
         <script src="/javascripts/charDesktopScript.js"></script>
       </template>
 
-      <script src="/javascripts/newSyncScript.js"></script>
+      <script src="/javascripts/syncScript.js"></script>
     </template>
 
     <script src="/socket.io/socket.io.js"></script>
