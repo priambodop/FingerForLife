@@ -42,7 +42,7 @@ form #code{
   text-align: center;
 }
 
-#requestButton:hover{
+#requestButton:hover, #requestButton:focus{
   background-color: #DCB21D;
 }
 

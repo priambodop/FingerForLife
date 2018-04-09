@@ -1,14 +1,30 @@
 /* CharMobile Style */
+@font-face {
+  font-family: "fingerfunny";
+  src: url("Nickname_DEMO.otf");
+}
 
-#welcomeTitle{
+
+.mobileContainer{
+  width: 900px;
+  height: 600px;
+  margin: auto;
+  margin-top: 40px;
+}
+
+.charList{
+  margin-left: 100px;
+}
+
+#welcomeTitle h1{
   text-align: center;
-  font-size: 22pt;
+  font-size: 20pt;
   font-family: sans-serif;
 }
 
 label{
-  width: 200px;
-  height: 250px;
+  width: 150px;
+  height: 200px;
 }
 
 input[type=radio]{
@@ -31,4 +47,27 @@ label img{
   width: 200px;
   height: 250px;
   margin-left: 100px;
+}
+
+#nextButton{
+  width: 150px;
+  height: 60px;
+  /* margin-left: 50px;
+  margin-bottom: 5px; */
+  float: right;
+  border-radius: 30px;
+  border-width: 5pt;
+  border-color: #DB0A5B;
+  border-style:inset;
+  background-color: #F2784B;
+
+  font-family: "fingerfunny";
+  text-align: center;
+  /* margin-top: 23px; */
+  font-size: 20pt;
+  color: white;
+}
+
+#nextButton:hover, #nextButton:focus{
+  background-color: #F54707;
 }
