@@ -1,3 +1,5 @@
+//MAKE RESPONSIVE LAYOUT !!!
+
 var socket = io();
 
 // Socket.io Code related
@@ -8,7 +10,7 @@ socket.on('connect', function(){
 });
 
 //When a client successfully join the room
-//The message shown here.
+//The message is shown here.
 socket.on('joinSucceed', function(msg){
   var messages = document.getElementById("joined");
   messages.innerHTML = msg;
