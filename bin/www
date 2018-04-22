@@ -80,6 +80,17 @@ io.on('connection', function(socket){
     console.log(`Player with id: ${user.id} in room ${user.room} is selecting char number ${msg.val}`);
   }),
 
+  socket.on('charIsReady', (msg) => {
+    console.log(`data is received ${msg}`);
+    var user = users.getUser(socket.id);
+    io.to(user.room).emit('startTheGame', msg);
+  }),
+
+  socket.on('stepClicked', (message) => {
+    var user = users.getUser(socket.id);
+    io.to(user.room).emit('moveThePlayer', message);
+  }),
+
   //debug purpose
   socket.on('charMobile', (msg) => {
     socket.emit('CharMobileAccepted', msg);

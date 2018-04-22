@@ -48,7 +48,7 @@
       </div>
       <p id="joined"></p>
 
-
+      <!-- Character Page Mobile -->
       <template id="charMobile">
         <link rel="stylesheet" href="stylesheets/charMobileStyle.css">
         <div class="mobileContainer">
@@ -73,9 +73,24 @@
           <button onclick="sendChar()" id="nextButton">CHOOSE</button>
         </div>
 
-
-
         <script src="/javascripts/charMobileScript.js"></script>
+
+        <!-- GamePlay Mobile Page -->
+        <template id="gamePlayMobile">
+          <link rel="stylesheet" href="stylesheets/gamePlayMobileStyle.css">
+
+          <div class="instructionContainer">
+            <div id="instruction">
+
+            </div>
+          </div>
+          <div id="stepLeft" onclick="stepClicked()">
+            <img src="images/stepUp.png">
+          </div>
+
+          <script src="/javascripts/gamePlayMobileScript.js"></script>
+        </template>
+
       </template>
 
       <script src="/javascripts/mobileScript.js"></script>
@@ -117,6 +132,7 @@
 
       </div>
 
+      <!-- Choose a Char Page Desktop -->
       <template id="charDesktop">
         <link rel="stylesheet" href="stylesheets/charDesktopStyle.css">
         <div class="desktopContainer">
@@ -143,6 +159,23 @@
             </div>
           </div>
         </div>
+
+        <!-- Game Play Page on Desktop  -->
+        <template id="gamePlayDesktop">
+          <link rel="stylesheet" href="stylesheets/gamePlayDesktopStyle.css">
+
+          <!-- <div class="countDownContainer">
+            <div id="countDown">
+
+            </div>
+          </div> -->
+
+          <div class="canvasContainer">
+            <canvas id="canvasGpDesktop" width="900" height="600"></canvas>
+          </div>
+
+          <script src="/javascripts/gamePlayDesktopScript.js"></script>
+        </template>
 
         <script src="/javascripts/charDesktopScript.js"></script>
       </template>

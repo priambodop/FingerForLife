@@ -1,9 +1,19 @@
+var mark = 0;
+
 // socket.io connection related starts here
 
 socket.emit('charMobile', `Char Mobile is connecting to Socket.io with id: ${socket.id}`);
 
 socket.on('CharMobileAccepted', function(msg){
   console.log(msg);
+});
+
+socket.on('charSent', function(msg){
+  mark += 1;
+  if (mark == 2) {
+    mark = 0;
+    toGamePlayMobile();
+  }
 });
 
 // socket.io connection related ends here
@@ -20,11 +30,17 @@ function selectChar(){
   console.log(`Player is choosing char number ${valButton}`);
 }
 
+function toGamePlayMobile(){
+  var gpMobile = $('#gamePlayMobile').html();
+  bg.html(gpMobile);
+}
+
 function sendChar(){
   var valButton = $('input[name="radioChar"]:checked').val();
   socket.emit('sendingChar', {
     val: valButton,
-    id: socket.id
+    id: socket.id,
+    marker: 1
   });
 
   //debug purpose
