@@ -58,7 +58,6 @@ function init(){
   track.onload = function(){
       ctx.drawImage(track, 0, 0);
   }
-
 }
 
 function beginCountDown(beginCounter, msg){
@@ -148,7 +147,7 @@ function readyPlayerOne(){
         xPosition1 -= 0.3;
         yPosition1 -= 0.5;
       }
-      // ctx.translate(xPosition1, yPosition1);
+
       ctx.drawImage(player1Char, xPosition1, yPosition1);
       ctx.drawImage(player2Char, xPosition2, yPosition2);
       ctx.restore();
@@ -179,17 +178,20 @@ function readyPlayerOne(){
         xPosition1 += 0.5;
         yPosition1 -= 0.7;
       }
-      // ctx.translate(xPosition1, yPosition1);
-      ctx.drawImage(player1Char, xPosition1, yPosition1);
+
       ctx.drawImage(player2Char, xPosition2, yPosition2);
+      ctx.drawImage(player1Char, xPosition1, yPosition1);
       ctx.restore();
-    }else {
-      console.log('top row');
+    }else if(xPosition1 < 700 && yPosition1 >= 65){
+      console.log('top row 2');
       ctx.save();
       xPosition1 += 0.5;
-      ctx.drawImage(player1Char, xPosition1, yPosition1);
       ctx.drawImage(player2Char, xPosition2, yPosition2);
+      ctx.drawImage(player1Char, xPosition1, yPosition1);
       ctx.restore();
+    }else {
+      ctx.drawImage(player2Char, xPosition2, yPosition2);
+      ctx.drawImage(player1Char, xPosition1, yPosition1);
     }
 
     ctx.restore();
@@ -239,14 +241,6 @@ function readyPlayerTwo(){
       yPosition2 -= 0.7;
     }
 
-    // if(yPosition2 > 300) {
-    //   xPosition2 += 0.2;
-    //   yPosition2 -= 0.5;
-    // }else{
-    //   xPosition2 -= 0.3;
-    //   yPosition2 -= 0.5;
-    // }
-
     ctx.drawImage(player2Char, xPosition2, yPosition2);
     ctx.drawImage(player1Char, xPosition1, yPosition1);
 
@@ -259,8 +253,8 @@ function readyPlayerTwo(){
     xPosition2 -= 0.5;
     ctx.save();
 
-    ctx.drawImage(player2Char, xPosition2, yPosition2);
     ctx.drawImage(player1Char, xPosition1, yPosition1);
+    ctx.drawImage(player2Char, xPosition2, yPosition2);
     ctx.restore();
   }else if(xPosition2 < 680 && yPosition2 >= 70){
     // LEFT CURVE
@@ -279,27 +273,21 @@ function readyPlayerTwo(){
     ctx.drawImage(player2Char, xPosition2, yPosition2);
     ctx.drawImage(player1Char, xPosition1, yPosition1);
     ctx.restore();
-  }else {
+  }else if(xPosition2 < 700 && yPosition2 >= 65){
     console.log('top row 2');
     ctx.save();
     xPosition2 += 0.5;
     ctx.drawImage(player2Char, xPosition2, yPosition2);
     ctx.drawImage(player1Char, xPosition1, yPosition1);
     ctx.restore();
+  }else {
+    ctx.drawImage(player2Char, xPosition2, yPosition2);
+    ctx.drawImage(player1Char, xPosition1, yPosition1);
   }
 
 
+
   ctx.restore();
-
-
-  ctx.beginPath();
-  ctx.moveTo(100, 450);
-  ctx.lineTo(680, 450);
-  ctx.arc(680, 390, 60, (Math.PI / 180) * 90, (Math.PI / 180) * 270, true);
-  ctx.lineTo(190, 330);
-  ctx.arc(190, 210, 120, (Math.PI / 180) * 90, (Math.PI / 180) * 270, false);
-  ctx.lineTo(790, 90);
-  ctx.stroke();
 
   ctx.drawImage(track, 0, 0);
 

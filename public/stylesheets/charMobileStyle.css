@@ -6,30 +6,42 @@
 
 /* LOOSE THE WIDTH AND HEIGHT */
 
+@media (max-width:900px) and (max-height:600px;){
+  .mobileContainer{
+    width: auto;
+    height: auto;
+  }
+}
+
 .mobileContainer{
   width: 900px;
   height: 600px;
   margin: auto;
-  margin-top: 40px;
+  /* border: 2px solid black; */
+  /* margin-top: 40px; */
 }
 
 .charList{
-  margin-left: 100px;
+  border: 2px solid black;
+  padding: 10px;
+  margin-left: 25px;
+  /* width: 900px;
+  height: 600px; */
 }
 
-#welcomeTitle h1{
+#title{
   text-align: center;
   font-size: 20pt;
   font-family: sans-serif;
 }
 
 label{
-  width: 150px;
+  width: 100px;
   height: 200px;
 }
 
 input[type=radio]{
-  margin-left: 200px;
+  /* margin-left: 200px; */
   display:none;
 }
 
@@ -40,14 +52,20 @@ input[type=radio]:checked + label{
   border-style:inset;
 }
 
-#char1, #char3{
+/* #char1, #char3{
   margin-left: 200px;
-}
+} */
+
+/* #char1, #char2, #char3, #char4{
+  width: 200px;
+  height: 200px;
+} */
 
 label img{
   width: 200px;
   height: 250px;
-  margin-left: 100px;
+  margin: 15px;
+  /* margin-left: 100px; */
 }
 
 #nextButton{
@@ -55,7 +73,7 @@ label img{
   height: 60px;
   /* margin-left: 50px;
   margin-bottom: 5px; */
-  float: right;
+  /* float: left; */
   border-radius: 30px;
   border-width: 5pt;
   border-color: #DB0A5B;

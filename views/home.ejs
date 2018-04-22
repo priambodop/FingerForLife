@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" >
-    <meta name="viewport" content="width=device-width, intial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, intial-scale=1.0, shrink-to-fit=no">
     <!-- TRY THISSS !!!! -->
 
     <!-- USE GIT REVERT  -->
@@ -17,7 +17,7 @@
     <template id="homePage">
       <div class="titleContainer">
         <div class="leftFing">
-          <img src="images/finga.png" alt="finger">
+          <img src="images/finga.png" id="leftFingImg">
         </div>
 
         <div class="wordContainer">
@@ -31,7 +31,7 @@
         </div>
 
         <div class="rightFing">
-          <img src="images/finga.png" alt="finger">
+          <img src="images/finga.png" id="rightFingImg">
         </div>
       </div>
     </template>
@@ -51,12 +51,31 @@
       <!-- Character Page Mobile -->
       <template id="charMobile">
         <link rel="stylesheet" href="stylesheets/charMobileStyle.css">
-        <div class="mobileContainer">
-          <div id="welcomeTitle">
-            <h1>Please select a character to play the game.</h1>
-          </div>
+        <h1 id="title">Please select a character to play the game.</h1>
 
-          <div class="charList">
+        <div class="charList">
+          <input type="radio" name="radioChar" id="char1" value="1" onclick="selectChar()">
+          <label for="char1"><img src="images/BrocoDude.png" alt="finger"></label>
+
+          <input type="radio" name="radioChar" id="char2" value="2" onclick="selectChar()">
+          <label for="char2"><img src="images/DabuDonut.png" alt="finger"></label><br>
+
+          <input type="radio" name="radioChar" id="char3" value="3" onclick="selectChar()">
+          <label for="char3"><img src="images/GrapeYoda.png" alt="finger"></label>
+
+          <input type="radio" name="radioChar" id="char4" value="4" onclick="selectChar()">
+          <label for="char4"><img src="images/SummerEgg.png" alt="finger"></label>
+
+          <button onclick="sendChar()" id="nextButton">CHOOSE</button>
+        </div>
+
+
+        <!-- <div class="mobileContainer"> -->
+          <!-- <div id="welcomeTitle"> -->
+            <!-- <h1 id="title">Please select a character to play the game.</h1> -->
+          <!-- </div> -->
+
+          <!-- <div class="charList">
             <input type="radio" name="radioChar" id="char1" value="1" onclick="selectChar()">
             <label for="char1"><img src="images/BrocoDude.png" alt="finger"></label>
 
@@ -68,10 +87,10 @@
 
             <input type="radio" name="radioChar" id="char4" value="4" onclick="selectChar()">
             <label for="char4"><img src="images/SummerEgg.png" alt="finger"></label>
-          </div>
+          </div> -->
 
-          <button onclick="sendChar()" id="nextButton">CHOOSE</button>
-        </div>
+          <!-- <button onclick="sendChar()" id="nextButton">CHOOSE</button> -->
+        <!-- </div> -->
 
         <script src="/javascripts/charMobileScript.js"></script>
 
@@ -86,6 +105,10 @@
           </div>
           <div id="stepLeft" onclick="stepClicked()">
             <img src="images/stepUp.png">
+          </div>
+
+          <div id="stepRight" onclick="stepClicked()">
+            <img src="images/stepUpRight.png">
           </div>
 
           <script src="/javascripts/gamePlayMobileScript.js"></script>
