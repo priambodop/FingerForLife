@@ -1,6 +1,5 @@
 var canvas = document.getElementById('canvasGpDesktop');
 var ctx = canvas.getContext('2d');
-var ctx1 = canvas.getContext('2d');
 var ctx2 = canvas.getContext('2d');
 
 var track = new Image();
@@ -34,6 +33,8 @@ timer3.src = 'images/timer3.png';
 timerArray.push(timer1);
 timerArray.push(timer2);
 timerArray.push(timer3);
+// Make Sequence Diagram For THESIS DOCUMENT
+// DIVIDE IT BY A SESSION e.g. for createRoom, requestToJoin, etc...
 
 socket.on('moveThePlayer', function(msg){
   if (msg === dataOfPlayer[0].playerId) {
@@ -41,7 +42,6 @@ socket.on('moveThePlayer', function(msg){
   }else {
     readyPlayerTwo();
   }
-
 });
 
 socket.on('startTheGame', function(msg){
@@ -100,7 +100,7 @@ function drawChar(data){
     player1Char.src = 'images/summerEggTiny.png';
   }
 
-  if (player2Val == 2) {
+  if (player2Val == 1) {
     player2Char.src = 'images/brocoDudeTiny.png';
   }else if (player2Val == 2) {
     player2Char.src = 'images/dabuDonutTiny.png';
@@ -182,8 +182,8 @@ function readyPlayerOne(){
       ctx.drawImage(player2Char, xPosition2, yPosition2);
       ctx.drawImage(player1Char, xPosition1, yPosition1);
       ctx.restore();
-    }else if(xPosition1 < 700 && yPosition1 >= 65){
-      console.log('top row 2');
+    }else if(xPosition1 < 700 && yPosition1 >= 8){
+      console.log('top row ');
       ctx.save();
       xPosition1 += 0.5;
       ctx.drawImage(player2Char, xPosition2, yPosition2);
@@ -206,7 +206,7 @@ function readyPlayerOne(){
       progressPlayer1 = 0;
     }
 }
-
+// USE ARRAY FOR PLAYER AND CHARACTER
 
 function readyPlayerTwo(){
   ctx.globalCompositeOperation = 'destination-over';

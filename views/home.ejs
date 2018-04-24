@@ -42,12 +42,12 @@
       <div class="formContainer">
         <p id="command">Enter the code from the desktop below:</p>
         <form>
-          <input id="code" autocomplete="off" autofocus> <br>
+          <input id="code" type="number" autocomplete="off" autofocus> <br>
           <button id="requestButton" onclick="requestToJoin()">SEND</button>
         </form>
       </div>
       <p id="joined"></p>
-
+<!-- block element -->
       <!-- Character Page Mobile -->
       <template id="charMobile">
         <link rel="stylesheet" href="stylesheets/charMobileStyle.css">
@@ -103,13 +103,15 @@
 
             </div>
           </div>
-          <div id="stepLeft" onclick="stepClicked()">
+<!-- INLINE ELEMENT IS SPAN -->
+<!--  -->
+          <span id="stepLeft" onclick="stepClicked()">
             <img src="images/stepUp.png">
-          </div>
+          </span>
 
-          <div id="stepRight" onclick="stepClicked()">
+          <span id="stepRight" onclick="stepClicked()">
             <img src="images/stepUpRight.png">
-          </div>
+          </span>
 
           <script src="/javascripts/gamePlayMobileScript.js"></script>
         </template>
