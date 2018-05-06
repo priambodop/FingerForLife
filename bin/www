@@ -56,6 +56,11 @@ io.on('connection', function(socket){
     socket.emit('charDesktopAcc', msg);
   }),
 
+  socket.on('sendingTheWinner', (winner) => {
+    var user = users.getUser(socket.id);
+    io.to(user.room).emit('getTheWinner', winner);
+  }),
+
   //When a room is already full
   //redirecting to the character page
   socket.on('roomFull', (msg) => {
@@ -101,7 +106,7 @@ io.on('connection', function(socket){
     var check = users.isRoomExist(msg.room);
 
     //debug purpose
-    console.log(`this is check: ${check}`);
+    console.log(`this is check ${check}`);
 
     if (check === 1) {
       socket.join(msg.room);
@@ -112,11 +117,12 @@ io.on('connection', function(socket){
       //debug purpose
       console.log(`a user with id: ${user.id} has joined in ${user.room}`);
 
-      io.to(user.room).emit('requestAccepted', msg);
+      // io.to(user.room).emit('requestAccepted', msg);
+      socket.broadcast.to(user.room).emit('requestAccepted', msg);
       socket.emit('joinSucceed', 'Welcome to the game :) Wait for other player to join');
       socket.broadcast.to(user.room).emit('joinSucceed', `a user with id: ${msg.id} is joined`);
     }else{
-      socket.emit('joinSucceed', 'The room is not exist');
+      socket.emit('joinRejected', 'The room is not exist');
     }
   });
 });

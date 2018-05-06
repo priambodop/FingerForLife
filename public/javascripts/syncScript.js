@@ -50,9 +50,10 @@ function getRandInt(){
 function requestAccepted(msg){
   var rom = text.toString();
   console.log(`this is room: ${rom}`);
+  console.log(`sum of player: ${player}`);
 
   if (msg.room === rom) {
-    if (player < 1) {
+    if (player == 0) {
       console.log(`Player with id: ${msg.id} is joined`);
 
       var player1 = {
@@ -63,8 +64,8 @@ function requestAccepted(msg){
 
       var play1 = document.getElementById("player1");
       play1.innerHTML = 'player 1 is joining in ' + msg.room;
-      player = player + 1;
-
+      player++;
+      console.log(`after player1 joining: ${player}`);
     }else {
       console.log(`Player with id: ${msg.id} is joined`);
 
@@ -82,6 +83,8 @@ function requestAccepted(msg){
         id: msg.id,
         room: msg.room,
       });
+      player = 0;
+      console.log(`after player2 joining: ${player}`);
     }
   }
 }

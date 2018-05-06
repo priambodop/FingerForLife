@@ -189,17 +189,29 @@
         <template id="gamePlayDesktop">
           <link rel="stylesheet" href="stylesheets/gamePlayDesktopStyle.css">
 
-          <!-- <div class="countDownContainer">
-            <div id="countDown">
-
-            </div>
-          </div> -->
-
           <div class="canvasContainer">
             <canvas id="canvasGpDesktop" width="900" height="600"></canvas>
           </div>
 
           <script src="/javascripts/gamePlayDesktopScript.js"></script>
+
+          <!-- Winning Page on Desktop -->
+          <template id="winningDesktop">
+            <link rel="stylesheet" href="stylesheets/winningDesktopStyle.css">
+
+
+              <span class="canvasWinStageContainer">
+                <canvas id="canvasWinStage" width="400" height="600"></canvas>
+              </span>
+
+              <span class="navigatorContainer">
+                <button id="exitButton" onclick="toHomePage()">Exit</button>
+              </span>
+
+
+            <script src="/javascripts/winningDesktopScript.js"></script>
+          </template>
+
         </template>
 
         <script src="/javascripts/charDesktopScript.js"></script>

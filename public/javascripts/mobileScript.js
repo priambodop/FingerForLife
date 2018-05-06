@@ -16,6 +16,11 @@ socket.on('joinSucceed', function(msg){
   messages.innerHTML = msg;
 });
 
+socket.on('joinRejected', function(msg){
+  var messages = document.getElementById("joined");
+  messages.innerHTML = msg;
+});
+
 //When the room is full,
 //Redirect to character page using toCharMobile() function
 socket.on('toNextPage', function(msg){

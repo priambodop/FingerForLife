@@ -15,7 +15,7 @@ class Users{
     console.log(`The room to be Checked: ${room}`);
     var tempUser = this.userArray.filter((user) => user.room === room);
     console.log(tempUser);
-    if (tempUser.length == 0 || tempUser.length == 3) {
+    if (tempUser.length == 0) {
       result = 0;
       console.log(`result false: ${result}`);
     }else{

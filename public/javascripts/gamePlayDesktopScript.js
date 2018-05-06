@@ -15,7 +15,12 @@ var dataOfPlayer;
 var player1Val = 0;
 var player2Val = 0;
 
+var winner = 0;
+
 var timerArray = [];
+var charArray = [];
+
+var arrOfPlayerChar = [2];
 
 var aniFrame;
 var aniFrame2;
@@ -29,6 +34,11 @@ var yPosition2 = 400;
 timer1.src = 'images/timer1.png';
 timer2.src = 'images/timer2.png';
 timer3.src = 'images/timer3.png';
+
+charArray.push('images/brocoDudeTiny.png');
+charArray.push('images/dabuDonutTiny.png');
+charArray.push('images/grapeYodaTiny.png');
+charArray.push('images/summerEggTiny.png');
 
 timerArray.push(timer1);
 timerArray.push(timer2);
@@ -56,7 +66,7 @@ socket.on('startTheGame', function(msg){
 function init(){
   track.src = 'images/track.png';
   track.onload = function(){
-      ctx.drawImage(track, 0, 0);
+    ctx.drawImage(track, 0, 0);
   }
 }
 
@@ -88,32 +98,48 @@ function drawChar(data){
   console.log(`this is player2Val : ${player2Val}`);
 
   if (player1Val == 1) {
-    player1Char.src = 'images/brocoDudeTiny.png';
-
+    player1Char.src = charArray[0];
   }else if (player1Val == 2) {
-    player1Char.src = 'images/dabuDonutTiny.png';
-
+    player1Char.src = charArray[1];
   }else if (player1Val == 3) {
-    player1Char.src = 'images/grapeYodaTiny.png';
-
+    player1Char.src = charArray[2];
   }else{
-    player1Char.src = 'images/summerEggTiny.png';
+    player1Char.src = charArray[3];
   }
 
   if (player2Val == 1) {
-    player2Char.src = 'images/brocoDudeTiny.png';
+    player2Char.src = charArray[0];
   }else if (player2Val == 2) {
-    player2Char.src = 'images/dabuDonutTiny.png';
+    player2Char.src = charArray[1];
   }else if (player2Val == 3) {
-    player2Char.src = 'images/grapeYodaTiny.png';
+    player2Char.src = charArray[2];
   }else {
-    player2Char.src = 'images/summerEggTiny.png';
+    player2Char.src = charArray[3];
   }
+
+  arrOfPlayerChar[0] = player1Char;
+  arrOfPlayerChar[1] = player2Char;
 }
 
 function beginGamePlay(){
   readyPlayerOne();
   readyPlayerTwo();
+}
+
+function reachFinishLine(player){
+  if (winner == 0) {
+    winner = player;
+  }
+  socket.emit('sendingTheWinner',{
+    playerWin: winner,
+    playerCharArr: arrOfPlayerChar
+  });
+  toWinningPage();
+}
+
+function toWinningPage(){
+  var winDesktop = $('#winningDesktop').html();
+  bg.html(winDesktop);
 }
 
 function readyPlayerOne(){
@@ -125,6 +151,7 @@ function readyPlayerOne(){
 
     progressPlayer1 += 1;
     if ( xPosition1 < 680 && yPosition1 == 340 ) {
+      //BOTTOM ROW
       console.log('bottom Row');
       ctx.save();
       xPosition1 += 0.5;
@@ -183,13 +210,15 @@ function readyPlayerOne(){
       ctx.drawImage(player1Char, xPosition1, yPosition1);
       ctx.restore();
     }else if(xPosition1 < 700 && yPosition1 >= 8){
-      console.log('top row ');
+      //TOP ROW
+      console.log('top row');
       ctx.save();
       xPosition1 += 0.5;
       ctx.drawImage(player2Char, xPosition2, yPosition2);
       ctx.drawImage(player1Char, xPosition1, yPosition1);
       ctx.restore();
     }else {
+      reachFinishLine(1);
       ctx.drawImage(player2Char, xPosition2, yPosition2);
       ctx.drawImage(player1Char, xPosition1, yPosition1);
     }
@@ -281,6 +310,7 @@ function readyPlayerTwo(){
     ctx.drawImage(player1Char, xPosition1, yPosition1);
     ctx.restore();
   }else {
+    reachFinishLine(2);
     ctx.drawImage(player2Char, xPosition2, yPosition2);
     ctx.drawImage(player1Char, xPosition1, yPosition1);
   }
