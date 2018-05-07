@@ -15,6 +15,11 @@ socket.on('getTheWinner', function(msg){
   drawWinner(msg.playerWin);
 });
 
+socket.on('backHome', function(msg){
+  var homePage = $("#homePage").html();
+  bg.html(homePage);
+});
+
 function drawStage(){
   podium.src = 'images/winning.png';
   podium.onload = function(){
@@ -45,7 +50,6 @@ function drawSecondWinner(secondWinner){
 }
 
 function toHomePage(){
-  var homePage = $("#homePage").html();
-  bg.html(homePage);
+  socket.emit('goBackHome', 'back home');
 }
 drawStage();

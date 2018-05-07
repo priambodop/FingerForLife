@@ -63,6 +63,10 @@ socket.on('startTheGame', function(msg){
   beginCountDown(3, msg);
 });
 
+socket.on('toWinnerPage', function(msg){
+  toWinningPage();
+});
+
 function init(){
   track.src = 'images/track.png';
   track.onload = function(){
@@ -134,7 +138,7 @@ function reachFinishLine(player){
     playerWin: winner,
     playerCharArr: arrOfPlayerChar
   });
-  toWinningPage();
+  // toWinningPage();
 }
 
 function toWinningPage(){

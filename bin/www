@@ -35,6 +35,11 @@ var users = new Users();
   * Listen to socket.io connection
 */
 io.on('connection', function(socket){
+
+  socket.on('ping', () => {
+    socket.emit('pong');
+  }),
+
   console.log('Client has been connected to socket.io');
   socket.on('disconnect', () => {
     console.log('Client has been disconnected');
@@ -59,6 +64,14 @@ io.on('connection', function(socket){
   socket.on('sendingTheWinner', (winner) => {
     var user = users.getUser(socket.id);
     io.to(user.room).emit('getTheWinner', winner);
+
+    io.to(user.room).emit('toWinnerPage', winner);
+
+  }),
+
+  socket.on('goBackHome', (msg) => {
+    var user = users.getUser(socket.id);
+    io.to(user.room).emit('backHome', msg);
   }),
 
   //When a room is already full

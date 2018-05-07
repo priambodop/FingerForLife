@@ -5,11 +5,20 @@ socket.on('startTheGame', function(msg){
   showInstruction(3);
 });
 
+socket.on('toWinnerPage', function(msg){
+  moveToWinPage();
+});
+
 
 function stepClicked(){
   socket.emit('stepClicked', {
     playerID: socket.id
   });
+}
+
+function moveToWinPage(){
+  var winMobile= $('#winningMobile').html();
+  bg.html(winMobile);
 }
 
 

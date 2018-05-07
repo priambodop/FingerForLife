@@ -36,7 +36,7 @@ body{
 }
 
 @media (max-width:500px){
-  #leftFingImg, #rightFingImg{
+  #leftFingImg, #rightFingImg, #startButton{
     display: none;
   }
 
@@ -48,7 +48,7 @@ body{
 
 .titleContainer{
   /* ERASE ONLY THE WIDTH */
-  width: 1000px;
+  /* width: 1000px; */
   height: 480px;
   /* border: 2px solid black; */
   padding: 15px;

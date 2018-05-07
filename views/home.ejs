@@ -69,29 +69,6 @@
           <button onclick="sendChar()" id="nextButton">CHOOSE</button>
         </div>
 
-
-        <!-- <div class="mobileContainer"> -->
-          <!-- <div id="welcomeTitle"> -->
-            <!-- <h1 id="title">Please select a character to play the game.</h1> -->
-          <!-- </div> -->
-
-          <!-- <div class="charList">
-            <input type="radio" name="radioChar" id="char1" value="1" onclick="selectChar()">
-            <label for="char1"><img src="images/BrocoDude.png" alt="finger"></label>
-
-            <input type="radio" name="radioChar" id="char2" value="2" onclick="selectChar()">
-            <label for="char2"><img src="images/DabuDonut.png" alt="finger"></label><br>
-
-            <input type="radio" name="radioChar" id="char3" value="3" onclick="selectChar()">
-            <label for="char3"><img src="images/GrapeYoda.png" alt="finger"></label>
-
-            <input type="radio" name="radioChar" id="char4" value="4" onclick="selectChar()">
-            <label for="char4"><img src="images/SummerEgg.png" alt="finger"></label>
-          </div> -->
-
-          <!-- <button onclick="sendChar()" id="nextButton">CHOOSE</button> -->
-        <!-- </div> -->
-
         <script src="/javascripts/charMobileScript.js"></script>
 
         <!-- GamePlay Mobile Page -->
@@ -112,6 +89,16 @@
           <span id="stepRight" onclick="stepClicked()">
             <img src="images/stepUpRight.png">
           </span>
+
+          <template id="winningMobile">
+            <div class="gameOverContainer">
+              <div id="gameOver">
+
+              </div>
+            </div>
+
+            <script src="/javascripts/winningMobileScript.js"></script>
+          </template>
 
           <script src="/javascripts/gamePlayMobileScript.js"></script>
         </template>

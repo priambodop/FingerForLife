@@ -1,12 +1,17 @@
 //MAKE RESPONSIVE LAYOUT !!!
 
 var socket = io();
-
+var startTime;
 // Socket.io Code related
 
 socket.on('connect', function(){
   console.log('Client is connected !');
   console.log(`This is client id: ${socket.id}`);
+});
+
+socket.on('pong', function(){
+  var latency = Date.now() - startTime;
+  console.log(`this is latency: ${latency}`);
 });
 
 //When a client successfully join the room
@@ -49,3 +54,12 @@ function toCharMobile(){
   var charMobileHtml = $("#charMobile").html();
   bg.html(charMobileHtml);
 }
+
+function countLatency(){
+  setInterval(function(){
+    startTime = Date.now();
+    socket.emit('ping');
+  }, 2000);
+}
+
+countLatency();
