@@ -42,8 +42,6 @@ function requestToJoin(){
     socket.emit('requestToJoin', {
       id: socket.id,
       room: $('#code').val()
-    }, function(){
-      $('#code'.val(''))
     });
     return false;
   });
