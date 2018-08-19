@@ -10,16 +10,13 @@ var bg = $(".stage-area");
 
 socket.on('connect', function(){
   getRandInt();
-  console.log('Host is connected to socket.io server... ');
-  console.log(`This is sync socket id: ${socket.id}`);
 });
 
 socket.on('requestAccepted', function(msg){
-  console.log(`${msg.room} is opened`);
   requestAccepted(msg);
 });
 
-socket.on('toNextPage', function(msg){
+socket.on('toCharPage', function(msg){
   toCharDesk();
 });
 
@@ -49,11 +46,15 @@ function getRandInt(){
 
 function requestAccepted(msg){
   var rom = text.toString();
+
+  //debug purpose
   console.log(`this is room: ${rom}`);
   console.log(`sum of player: ${player}`);
 
   if (msg.room === rom) {
     if (player == 0) {
+
+      //debug purpose
       console.log(`Player with id: ${msg.id} is joined`);
 
       var player1 = {
@@ -65,8 +66,12 @@ function requestAccepted(msg){
       var play1 = document.getElementById("player1");
       play1.innerHTML = 'player 1 is joining in ' + msg.room;
       player++;
+
+      //debug purpose
       console.log(`after player1 joining: ${player}`);
     }else {
+
+      //debug purpose
       console.log(`Player with id: ${msg.id} is joined`);
 
       var player2 = {
@@ -80,10 +85,11 @@ function requestAccepted(msg){
       var play2 = document.getElementById("player2");
       play2.innerHTML = 'player 2 is joining in ' + msg.room;
       socket.emit('roomFull', {
-        id: msg.id,
-        room: msg.room,
+        // id: msg.id,
+        room: msg.room
       });
       player = 0;
+
       console.log(`after player2 joining: ${player}`);
     }
   }

@@ -36,15 +36,11 @@ var users = new Users();
 */
 io.on('connection', function(socket){
 
-  socket.on('ping', () => {
-    socket.emit('pong');
-  }),
+  // socket.on('ping', () => {
+  //   socket.emit('pong');
+  // }),
 
   console.log('Client has been connected to socket.io');
-  socket.on('disconnect', () => {
-    console.log('Client has been disconnected');
-    users.removeUser(socket.id);
-  }),
 
   socket.on('hostJoinRoom', (msg) => {
     socket.join(msg.room);
@@ -77,7 +73,7 @@ io.on('connection', function(socket){
   //When a room is already full
   //redirecting to the character page
   socket.on('roomFull', (msg) => {
-    io.to(msg.room).emit('toNextPage', msg);
+    io.to(msg.room).emit('toCharPage');
   }),
 
   //When a user is selecting a character
@@ -95,7 +91,7 @@ io.on('connection', function(socket){
     io.to(user.room).emit('charSent', msg);
 
     //debug purpose
-    console.log(`Player with id: ${user.id} in room ${user.room} is selecting char number ${msg.val}`);
+    console.log(`Player with id: ${user.id} in room ${user.room} is choose char number ${msg.val}`);
   }),
 
   socket.on('charIsReady', (msg) => {
@@ -115,7 +111,7 @@ io.on('connection', function(socket){
   }),
 
   // When a user in mobile page and requesting to join the game
-  socket.on('requestToJoin', function(msg, callback){
+  socket.on('requestToJoin', function(msg){
     var check = users.isRoomExist(msg.room);
 
     //debug purpose
@@ -125,18 +121,25 @@ io.on('connection', function(socket){
       socket.join(msg.room);
       users.removeUser(msg.id);
       users.addUser(msg.id, msg.room);
-      var user = users.getUser(msg.id);
 
       //debug purpose
+      var user = users.getUser(msg.id);
       console.log(`a user with id: ${user.id} has joined in ${user.room}`);
+      // socket.broadcast.to(user.room).emit('requestAccepted', msg);
 
-      // io.to(user.room).emit('requestAccepted', msg);
-      socket.broadcast.to(user.room).emit('requestAccepted', msg);
-      socket.emit('joinSucceed', 'Welcome to the game :) Wait for other player to join');
-      socket.broadcast.to(user.room).emit('joinSucceed', `a user with id: ${msg.id} is joined`);
+      io.to(user.room).emit('requestAccepted', msg);
+      socket.emit('joinSucceed', 'Welcome to the game :)');
+
+      //debug purpose
+      // socket.broadcast.to(user.room).emit('joinSucceed', `a user with id: ${msg.id} is joined`);
     }else{
       socket.emit('joinRejected', 'The room is not exist');
     }
+  }),
+
+  socket.on('disconnect', () => {
+    console.log('Client has been disconnected');
+    users.removeUser(socket.id);
   });
 });
 

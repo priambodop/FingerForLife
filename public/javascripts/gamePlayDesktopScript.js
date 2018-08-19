@@ -56,10 +56,14 @@ socket.on('moveThePlayer', function(msg){
 
 socket.on('startTheGame', function(msg){
   init();
+
+  //debug purpose
   dataOfPlayer = msg;
   console.log(dataOfPlayer);
   console.log(`data of player 1: ${dataOfPlayer[0].playerId}`);
   console.log(`data of player 2: ${dataOfPlayer[1].playerId}`);
+  // ends here
+
   beginCountDown(3, msg);
 });
 
