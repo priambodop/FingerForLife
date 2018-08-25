@@ -110,7 +110,7 @@ io.on('connection', function(socket){
     socket.emit('CharMobileAccepted', msg);
   }),
 
-  // When a user in mobile page and requesting to join the game
+  // When a user requesting to join the game
   socket.on('requestToJoin', function(msg){
     var check = users.isRoomExist(msg.room);
 
