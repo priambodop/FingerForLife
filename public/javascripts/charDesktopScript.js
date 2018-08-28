@@ -17,7 +17,7 @@ socket.on('charSelecting', function(msg){
   if (msg.id === players[0].id) {
     var imagep1 = document.getElementById("imagePlayer1");
     if (msg.val == 1) {
-      imagep1.innerHTML = '<img class="imgChar" src="images/brocoDudeTiny.png" alt="finger">';
+      imagep1.innerHTML = '<img class="imgChar" src="images/BrocoDude.png" alt="finger">';
     }else if (msg.val == 2) {
       imagep1.innerHTML = '<img class="imgChar" src="images/DabuDonut.png" alt="finger">';
     }else if (msg.val == 3) {
@@ -28,7 +28,7 @@ socket.on('charSelecting', function(msg){
   }else{
     var imagep2 = document.getElementById("imagePlayer2");
     if (msg.val == 1) {
-      imagep2.innerHTML = '<img class="imgChar" src="images/brocoDudeTiny.png" alt="finger">';
+      imagep2.innerHTML = '<img class="imgChar" src="images/BrocoDude.png" alt="finger">';
     }else if (msg.val == 2) {
       imagep2.innerHTML = '<img class="imgChar" src="images/DabuDonut.png" alt="finger">';
     }else if (msg.val == 3) {

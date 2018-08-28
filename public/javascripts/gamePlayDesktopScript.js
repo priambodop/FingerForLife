@@ -43,8 +43,6 @@ charArray.push('images/summerEggTiny.png');
 timerArray.push(timer1);
 timerArray.push(timer2);
 timerArray.push(timer3);
-// Make Sequence Diagram For THESIS DOCUMENT
-// DIVIDE IT BY A SESSION e.g. for createRoom, requestToJoin, etc...
 
 socket.on('moveThePlayer', function(msg){
   if (msg === dataOfPlayer[0].playerId) {

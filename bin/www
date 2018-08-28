@@ -8,7 +8,7 @@ var app = require('../app');
 var debug = require('debug')('fingerforlife:server');
 var http = require('http');
 var socketIO = require('socket.io');
-var {Users} = require('../public/javascripts/utils/users');
+var {Users} = require('./utils/users');
 
 /**
  * Get port from environment and store in Express.
