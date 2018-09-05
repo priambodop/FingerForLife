@@ -103,25 +103,28 @@ function drawChar(data){
   console.log(`this is player1Val : ${player1Val}`);
   console.log(`this is player2Val : ${player2Val}`);
 
-  if (player1Val == 1) {
-    player1Char.src = charArray[0];
-  }else if (player1Val == 2) {
-    player1Char.src = charArray[1];
-  }else if (player1Val == 3) {
-    player1Char.src = charArray[2];
-  }else{
-    player1Char.src = charArray[3];
-  }
+  player1Char.src = charArray[player1Val - 1];
+  player2Char.src = charArray[player2Val - 1];
 
-  if (player2Val == 1) {
-    player2Char.src = charArray[0];
-  }else if (player2Val == 2) {
-    player2Char.src = charArray[1];
-  }else if (player2Val == 3) {
-    player2Char.src = charArray[2];
-  }else {
-    player2Char.src = charArray[3];
-  }
+  // if (player1Val == 1) {
+  //   player1Char.src = charArray[0];
+  // }else if (player1Val == 2) {
+  //   player1Char.src = charArray[1];
+  // }else if (player1Val == 3) {
+  //   player1Char.src = charArray[2];
+  // }else{
+  //   player1Char.src = charArray[3];
+  // }
+  //
+  // if (player2Val == 1) {
+  //   player2Char.src = charArray[0];
+  // }else if (player2Val == 2) {
+  //   player2Char.src = charArray[1];
+  // }else if (player2Val == 3) {
+  //   player2Char.src = charArray[2];
+  // }else {
+  //   player2Char.src = charArray[3];
+  // }
 
   arrOfPlayerChar[0] = player1Char;
   arrOfPlayerChar[1] = player2Char;
@@ -320,8 +323,6 @@ function readyPlayerTwo(){
     ctx.drawImage(player2Char, xPosition2, yPosition2);
     ctx.drawImage(player1Char, xPosition1, yPosition1);
   }
-
-
 
   ctx.restore();
 

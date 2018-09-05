@@ -11,30 +11,36 @@ socket.on('charDesktopAcc', function(msg){
 var marker = 0;
 var playerData = [];
 
+var imageArray = [];
+imageArray.push('<img class="imgChar" src="images/BrocoDude.png" alt="finger">');
+imageArray.push('<img class="imgChar" src="images/DabuDonut.png" alt="finger">');
+imageArray.push('<img class="imgChar" src="images/GrapeYoda.png" alt="finger">');
+imageArray.push('<img class="imgChar" src="images/SummerEgg.png" alt="finger">');
+
 //When a client is selecting a char on mobile page,
 //The choosen character is shown.
 socket.on('charSelecting', function(msg){
   if (msg.id === players[0].id) {
     var imagep1 = document.getElementById("imagePlayer1");
     if (msg.val == 1) {
-      imagep1.innerHTML = '<img class="imgChar" src="images/BrocoDude.png" alt="finger">';
+      imagep1.innerHTML = imageArray[msg.val - 1];
     }else if (msg.val == 2) {
-      imagep1.innerHTML = '<img class="imgChar" src="images/DabuDonut.png" alt="finger">';
+      imagep1.innerHTML = imageArray[msg.val - 1];
     }else if (msg.val == 3) {
-      imagep1.innerHTML = '<img class="imgChar" src="images/GrapeYoda.png" alt="finger">';
+      imagep1.innerHTML = imageArray[msg.val - 1];
     }else{
-      imagep1.innerHTML = '<img class="imgChar" src="images/SummerEgg.png" alt="finger">';
+      imagep1.innerHTML = imageArray[msg.val - 1];
     }
   }else{
     var imagep2 = document.getElementById("imagePlayer2");
     if (msg.val == 1) {
-      imagep2.innerHTML = '<img class="imgChar" src="images/BrocoDude.png" alt="finger">';
+      imagep2.innerHTML = imageArray[msg.val - 1];
     }else if (msg.val == 2) {
-      imagep2.innerHTML = '<img class="imgChar" src="images/DabuDonut.png" alt="finger">';
+      imagep2.innerHTML = imageArray[msg.val - 1];
     }else if (msg.val == 3) {
-      imagep2.innerHTML = '<img class="imgChar" src="images/GrapeYoda.png" alt="finger">';
+      imagep2.innerHTML = imageArray[msg.val - 1];
     }else{
-      imagep2.innerHTML = '<img class="imgChar" src="images/SummerEgg.png" alt="finger">';
+      imagep2.innerHTML = imageArray[msg.val - 1];
     }
   }
 });
