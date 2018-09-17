@@ -39,13 +39,17 @@ socket.on('toCharPage', function(msg){
 //Client requesting to join the room
 //After entering the code and click send
 function requestToJoin(){
-  $('form').submit(function(e){
-    e.preventDefault();
-    socket.emit('requestToJoin', {
-      id: socket.id,
-      room: $('#code').val()
-    });
+  socket.emit('requestToJoin', {
+    id: socket.id,
+    room: $('#code').val()
   });
+  // $('form').submit(function(e){
+  //   e.preventDefault();
+  //   socket.emit('requestToJoin', {
+  //     id: socket.id,
+  //     room: $('#code').val()
+  //   });
+  // });
 }
 
 //redirecting to a charMobile page.

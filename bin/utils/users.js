@@ -11,15 +11,15 @@ class Users{
   }
 
   isRoomExist(room){
-    var result = 0;
+    var result = false;
     console.log(`The room to be Checked: ${room}`);
     var tempUser = this.userArray.filter((user) => user.room === room);
     console.log(tempUser);
     if (tempUser.length == 0) {
-      result = 0;
+      result = false;
       console.log(`result false: ${result}`);
     }else{
-      result = 1;
+      result = true;
       console.log(`result true: ${result}`);
     }
 
@@ -38,6 +38,16 @@ class Users{
     }
 
     return tempUser;
+  }
+
+  removeRoom(room){
+    var tempRoom = this.userArray.filter((user) => user.room === room);
+
+    if (tempRoom) {
+      this.userArray = this.userArray.filter((user) => user.room !== room);
+    }
+
+    return tempRoom;
   }
 
   getUserList(room){

@@ -67,6 +67,7 @@ io.on('connection', function(socket){
 
   socket.on('goBackHome', (msg) => {
     var user = users.getUser(socket.id);
+    users.removeRoom(user.room);
     io.to(user.room).emit('backHome', msg);
   }),
 
@@ -113,11 +114,16 @@ io.on('connection', function(socket){
   // When a user requesting to join the game
   socket.on('requestToJoin', function(msg){
     var check = users.isRoomExist(msg.room);
+    var roomList = users.getUserList(msg.room);
 
     //debug purpose
     console.log(`this is check ${check}`);
 
-    if (check === 1) {
+    if (check === true) {
+      if (roomList.length === 3) {
+        socket.emit('joinRejected', 'The room is already full');
+      }
+      else{
       socket.join(msg.room);
       users.removeUser(msg.id);
       users.addUser(msg.id, msg.room);
@@ -128,8 +134,9 @@ io.on('connection', function(socket){
       // socket.broadcast.to(user.room).emit('requestAccepted', msg);
 
       io.to(user.room).emit('requestAccepted', msg);
-      socket.emit('joinSucceed', 'Welcome to the game :)');
+      socket.emit('joinSucceed', 'Welcome to the game !');
 
+      }
       //debug purpose
       // socket.broadcast.to(user.room).emit('joinSucceed', `a user with id: ${msg.id} is joined`);
     }else{
