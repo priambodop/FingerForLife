@@ -16,6 +16,7 @@ body{
   border-color: black;
   border-width: thick;
   margin: 20px;
+  margin-top: 60px;
   padding: 10px;
   background-color: #FDE3A7;
   /* border: 5px solid blue; */
@@ -26,29 +27,39 @@ body{
 .container{
   width:90%;
   margin:auto;
-  padding-top: 20px;
-  padding-bottom: 40px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   overflow:hidden;
   /* border: 2px solid red; */
 }
 
-#titles{
+/* #titles{
   margin-top:50px;
-  /* border: 2px solid black; */
+  border: 2px solid black;
+} */
+
+#titles .title_container{
+  width: 90%;
+  margin: auto;
+  overflow: hidden;
+  text-align: center;
+  /* border: 2px solid yellow; */
 }
 
 #titles .title{
   float:left;
   text-align: center;
   width:30%;
+  margin: 4px;
   padding:10px;
   /* border: 2px solid black; */
 }
+
 #titles .title .word{
   float: left;
   text-align: center;
   display: block;
-  /* border: 2px solid black; */
+  /* border: 2px solid green; */
   width: 250px;
   margin: 0;
   margin-left: 20px;
@@ -59,7 +70,7 @@ body{
   float: left;
   width: 250px;
   margin-left: 20px;
-  /* border: 2px solid black; */
+  /* border: 2px solid orange; */
 }
 
 #titles .title .word p{
@@ -91,16 +102,18 @@ body{
 
 #titles .title object{
   height:380px;
+  /* border: 2px solid purple; */
 }
 
 @media (max-width:1260px){
-  #leftFing, #rightFing, #startButton{
+  #left, #right, #startButton{
     display: none;
     float: none;
   }
 
   #joinButton{
     visibility: visible;
+    width: 85%;
   }
 }
 
@@ -110,7 +123,11 @@ body{
   }
 
   #titles .title .word, #titles .title .buttons{
-    margin-left: -1px;
+    margin-left: -10px;
+  }
+
+  #titles .title .word p{
+    font-size: 55pt;
   }
 }
 
