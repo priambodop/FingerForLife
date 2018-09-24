@@ -64,7 +64,7 @@ function requestAccepted(msg){
       players.push(player1);
 
       var play1 = document.getElementById("player1");
-      play1.innerHTML = 'player 1 is joining in ' + msg.room;
+      play1.innerHTML = '<p>PLAYER 1 HAS JOIN THE GAME</p>';
       player++;
 
       //debug purpose
@@ -83,7 +83,7 @@ function requestAccepted(msg){
       console.log(players);
 
       var play2 = document.getElementById("player2");
-      play2.innerHTML = 'player 2 is joining in ' + msg.room;
+      play2.innerHTML = '<p>PLAYER 2 HAS JOIN THE GAME</p>';
       socket.emit('roomFull', {
         // id: msg.id,
         room: msg.room

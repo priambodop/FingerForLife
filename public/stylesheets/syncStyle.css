@@ -169,3 +169,8 @@
   font-family: helvetica;
   float: left;
 }
+
+.player p{
+  font-family: 'fingerfunny';
+  font-size: 20pt;
+}

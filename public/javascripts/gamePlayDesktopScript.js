@@ -81,7 +81,6 @@ function beginCountDown(beginCounter, msg){
   console.log(`before showCountDown: ${counter}`);
   var timer = setInterval(showCountDown, 1000);
 
-
   function showCountDown(){
     if (beginCounter >= 1) {
       ctx.drawImage(timerArray[counter], 330, 150);
