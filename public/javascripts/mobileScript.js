@@ -9,16 +9,12 @@ socket.on('connect', function(){
   console.log(`This is client id: ${socket.id}`);
 });
 
-// socket.on('pong', function(){
-//   var latency = Date.now() - startTime;
-//   console.log(`this is latency: ${latency}`);
-// });
-
 //When a client successfully join the room
 //The message is shown here.
 socket.on('joinSucceed', function(msg){
   var messages = document.getElementById("joined");
   messages.innerHTML = msg;
+  document.getElementById("requestButton").disabled = true;
 });
 
 
@@ -57,12 +53,3 @@ function toCharMobile(){
   var charMobileHtml = $("#charMobile").html();
   bg.html(charMobileHtml);
 }
-
-// function countLatency(){
-//   setInterval(function(){
-//     startTime = Date.now();
-//     socket.emit('ping');
-//   }, 2000);
-// }
-//
-// countLatency();

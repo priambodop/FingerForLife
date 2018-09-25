@@ -37,12 +37,16 @@ function toGamePlayMobile(){
 
 function sendChar(){
   var valButton = $('input[name="radioChar"]:checked').val();
-  socket.emit('sendingChar', {
-    val: valButton,
-    id: socket.id,
-    marker: 1
-  });
-
-  //debug purpose
-  console.log(`PLayer has sending fixed character with number: ${valButton}`);
+  console.log(valButton);
+  if (valButton === undefined) {
+    alert("You have not choose a character.");
+  }
+  else{
+    socket.emit('sendingChar', {
+      val: valButton,
+      id: socket.id,
+      marker: 1
+    });
+    document.getElementById("nextButton").disabled = true;
+  }
 }
