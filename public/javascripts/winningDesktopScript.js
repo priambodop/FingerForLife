@@ -11,8 +11,18 @@ winnerCharArr.push('images/grapeYodaTiny.png');
 winnerCharArr.push('images/summerEggTiny.png');
 
 socket.on('getTheWinner', function(msg){
+  var averageLatencyP1 = totalLatencyP1 / counterLatencyP1;
+  var averageLatencyP2 = totalLatencyP2 / counterLatencyP2;
+
+  console.log(`This is counter latency p1: ${counterLatencyP1}`);
+  console.log(`This is counter latency p2: ${counterLatencyP2}`);
+
+  console.log(`This is average latency p1: ${averageLatencyP1}`);
+  console.log(`This is average latency p2: ${averageLatencyP2}`);
+
   console.log(`The Winner is : ${msg.playerWin}`);
   drawWinner(msg.playerWin);
+
 });
 
 socket.on('backHome', function(msg){

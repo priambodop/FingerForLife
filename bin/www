@@ -71,6 +71,10 @@ io.on('connection', function(socket){
     io.to(user.room).emit('backHome', msg);
   }),
 
+  socket.on('ping', (message) => {
+    socket.emit('pong', message);
+  }),
+
   //When a room is already full
   //redirecting to the character page
   socket.on('roomFull', (msg) => {

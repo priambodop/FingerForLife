@@ -31,6 +31,11 @@ var yPosition1 = 340;
 var xPosition2 = 90;
 var yPosition2 = 400;
 
+var counterLatencyP1 = 0;
+var counterLatencyP2 = 0;
+var totalLatencyP1 = 0;
+var totalLatencyP2 = 0;
+
 timer1.src = 'images/timer1.png';
 timer2.src = 'images/timer2.png';
 timer3.src = 'images/timer3.png';
@@ -46,8 +51,23 @@ timerArray.push(timer3);
 
 socket.on('moveThePlayer', function(msg){
   if (msg === dataOfPlayer[0].playerId) {
+    socket.on('pong', function(startTime){
+      var times = new Date();
+      var currentTime = times.getMilliseconds();
+      var latency = currentTime - startTime;
+      totalLatencyP1 += latency;
+      counterLatencyP1 += 1;
+    });
+
     readyPlayerOne();
   }else {
+    socket.on('pong', function(startTime){
+      var times = new Date();
+      var currentTime = times.getMilliseconds();
+      var latency = currentTime - startTime;
+      totalLatencyP2 += latency;
+      counterLatencyP2 += 1;
+    });
     readyPlayerTwo();
   }
 });

@@ -14,6 +14,10 @@ function stepClicked(){
   socket.emit('stepClicked', {
     playerID: socket.id
   });
+
+  var time = new Date();
+  startTime = time.getMilliseconds();
+  socket.emit('ping', startTime);
 }
 
 function moveToWinPage(){
