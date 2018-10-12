@@ -45,6 +45,12 @@ socket.on('charSelecting', function(msg){
   }
 });
 
+socket.on('playerDisconnected', function(playerId){
+  if(!alert('Oh no, player has been disconnected! Find your partner to continue!')){
+    window.location.href = "/";
+  }
+});
+
 socket.on('charSent', function(msg){
   marker = marker + msg.marker;
   console.log(`This is marker: ${marker}`);

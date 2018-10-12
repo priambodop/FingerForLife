@@ -8,6 +8,12 @@ socket.on('CharMobileAccepted', function(msg){
   console.log(msg);
 });
 
+socket.on('playerDisconnected', function(playerId){
+  if(!alert('Oh no, player has been disconnected! Find your partner to continue!')){
+    window.location.href = "/";
+  }
+});
+
 socket.on('charSent', function(msg){
   mark += 1;
   if (mark == 2) {

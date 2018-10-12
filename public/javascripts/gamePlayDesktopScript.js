@@ -72,6 +72,12 @@ socket.on('moveThePlayer', function(msg){
   }
 });
 
+socket.on('playerDisconnected', function(playerId){
+  if(!alert('Oh no, player has been disconnected! Find your partner to continue!')){
+    window.location.href = "/";
+  }
+});
+
 socket.on('startTheGame', function(msg){
   init();
 

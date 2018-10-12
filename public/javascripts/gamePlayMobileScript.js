@@ -9,6 +9,12 @@ socket.on('toWinnerPage', function(msg){
   moveToWinPage();
 });
 
+socket.on('playerDisconnected', function(playerId){
+  if(!alert('Oh no, player has been disconnected! Find your partner to continue!')){
+    window.location.href = "/";
+  }
+});
+
 
 function stepClicked(){
   socket.emit('stepClicked', {

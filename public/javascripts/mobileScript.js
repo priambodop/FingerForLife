@@ -35,10 +35,16 @@ socket.on('toCharPage', function(msg){
 //Client requesting to join the room
 //After entering the code and click send
 function requestToJoin(){
-  socket.emit('requestToJoin', {
-    id: socket.id,
-    room: $('#code').val()
-  });
+  var codeRoom = $('#code').val();
+  if (codeRoom === "") {
+    alert('Enter the code from the desktop');
+  }else{
+    socket.emit('requestToJoin', {
+      id: socket.id,
+      room: $('#code').val()
+    });
+  }
+
   // $('form').submit(function(e){
   //   e.preventDefault();
   //   socket.emit('requestToJoin', {
