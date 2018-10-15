@@ -146,7 +146,7 @@ io.on('connection', function(socket){
     }else{
       socket.emit('joinRejected', 'The room is not exist');
     }
-  }),
+  });
 
   // socket.on('disconnect', () => {
   //   console.log('Client has been disconnected');
