@@ -10,6 +10,7 @@ socket.on('charDesktopAcc', function(msg){
 
 var marker = 0;
 var playerData = [];
+var timeoutID;
 
 var imageArray = [];
 imageArray.push('<img src="images/BrocoDude.png" alt="finger">');
@@ -93,13 +94,29 @@ socket.on('charSent', function(msg){
 
   if (marker == 2) {
     marker = 0;
-    toGamePlayDesktop();
-    console.log(`Player data: ${playerData[0].playerId}`);
-    socket.emit('charIsReady', playerData);
+    beginWaiting(1);
+
+    // toGamePlayDesktop();
+    // console.log(`Player data: ${playerData[0].playerId}`);
+    // socket.emit('charIsReady', playerData);
   }
 });
+
+function beginWaiting(beginCounter){
+  var timer = setInterval(waitingToCall, 1000);
+
+  function waitingToCall(){
+    if (beginCounter >= 1) {
+      beginCounter -= 1;
+    }else{
+      clearInterval(timer);
+      toGamePlayDesktop();
+    }
+  }
+}
 
 function toGamePlayDesktop(){
   var gamePlayDesktop = $("#gamePlayDesktop").html();
   bg.html(gamePlayDesktop);
+  socket.emit('charIsReady', playerData);
 }

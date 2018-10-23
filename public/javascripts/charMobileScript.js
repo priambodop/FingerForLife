@@ -18,12 +18,25 @@ socket.on('charSent', function(msg){
   mark += 1;
   if (mark == 2) {
     mark = 0;
-    toGamePlayMobile();
+    waitForCall(1);
+    // toGamePlayMobile();
   }
 });
 
 // socket.io connection related ends here
 
+function waitForCall(beginCounter){
+  var timer = setInterval(countWaiting, 1000);
+
+  function countWaiting(){
+    if (beginCounter >= 1) {
+      beginCounter -= 1;
+    }else{
+      clearInterval(timer);
+      toGamePlayMobile();
+    }
+  }
+}
 
 function selectChar(){
   var valButton = $('input[name="radioChar"]:checked').val();
