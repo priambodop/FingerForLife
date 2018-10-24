@@ -108,6 +108,7 @@ io.on('connection', function(socket){
   socket.on('stepClicked', (message) => {
     var user = users.getUser(socket.id);
     io.to(user.room).emit('moveThePlayer', socket.id);
+    //supposed not error
   }),
 
   //debug purpose
