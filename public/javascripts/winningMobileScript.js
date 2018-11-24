@@ -1,16 +1,32 @@
 var game_over = document.getElementById('gameOver');
 
 socket.on('getTheWinner', function(msg){
-  showGameOver(msg.playerWin);
+  socket.emit('getTheMessage',{
+    theWinnerId: msg.winnerId
+  });
 });
 
 socket.on('backHome', function(msg){
   backToHome();
 });
 
-function showGameOver(winner){
-  gameOver.innerHTML = '<p>GAME OVER</p>';
-}
+socket.on('winning', function(msg){
+  gameOver.innerHTML = '<p>YOU WIN</p>';
+});
+
+socket.on('losing', function(msg){
+  gameOver.innerHTML = '<p>YOU LOSE</p>';
+});
+
+// function showGameOver(winner){
+//   if (msg.playerWin == 1) {
+//     socket.emit('winning');
+//   }
+//   else{
+//     socket.emit('lossing');
+//   }
+//   gameOver.innerHTML = '<p>GAME OVER</p>';
+// }
 
 function backToHome(){
   var homePage = $("#homePage").html();

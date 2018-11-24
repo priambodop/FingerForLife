@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('fingerforlife:server');
+// var debug = require('debug')('fingerforlife:server');
 var http = require('http');
 var socketIO = require('socket.io');
 var {Users} = require('./utils/users');
@@ -35,11 +35,6 @@ var users = new Users();
   * Listen to socket.io connection
 */
 io.on('connection', function(socket){
-
-  // socket.on('ping', () => {
-  //   socket.emit('pong');
-  // }),
-
   console.log('Client has been connected to socket.io');
 
   socket.on('hostJoinRoom', (msg) => {
@@ -62,7 +57,14 @@ io.on('connection', function(socket){
     io.to(user.room).emit('getTheWinner', winner);
 
     io.to(user.room).emit('toWinnerPage', winner);
+  }),
 
+  socket.on('getTheMessage', (message) => {
+    if (message.theWinnerId == socket.id) {
+      socket.emit('winning', 'YOU WIN');
+    }else{
+      socket.emit('losing', 'YOU LOSE');
+    }
   }),
 
   socket.on('goBackHome', (msg) => {

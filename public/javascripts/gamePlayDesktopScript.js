@@ -15,8 +15,6 @@ var dataOfPlayer;
 var player1Val = 0;
 var player2Val = 0;
 
-var winner = 0;
-
 var timerArray = [];
 var charArray = [];
 
@@ -141,14 +139,11 @@ function beginGamePlay(){
 }
 
 function reachFinishLine(player){
-  if (winner == 0) {
-    winner = player;
-  }
   socket.emit('sendingTheWinner',{
-    playerWin: winner,
-    playerCharArr: arrOfPlayerChar
+    playerWin: player,
+    playerCharArr: arrOfPlayerChar,
+    winnerId: dataOfPlayer[player-1].playerId
   });
-  // toWinningPage();
 }
 
 function toWinningPage(){
@@ -316,7 +311,7 @@ function readyPlayerTwo(){
     ctx.drawImage(player2Char, xPosition2, yPosition2);
     ctx.drawImage(player1Char, xPosition1, yPosition1);
     ctx.restore();
-  }else if(xPosition2 < 700 && yPosition2 >= 65){
+  }else if(xPosition2 < 655 && yPosition2 >= 65){
     console.log('top row 2');
     ctx.save();
     xPosition2 += 0.5;
