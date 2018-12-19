@@ -146,6 +146,7 @@ io.on('connection', function(socket){
       //debug purpose
       // socket.broadcast.to(user.room).emit('joinSucceed', `a user with id: ${msg.id} is joined`);
     }else{
+      //this is tryout
       socket.emit('joinRejected', 'The room is not exist');
     }
   });
